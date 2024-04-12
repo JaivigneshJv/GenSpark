@@ -38,3 +38,6 @@ Ensure you have .NET 6 installed on your machine.
 1. Open a terminal.
 2. Navigate to the project directory using `cd Day4\ -\ Apr\ 12/Day4/`.
 3. Run the program using the command `dotnet run`.
+
+## Demo
+![Demo](./ezgif-7-961369c7fb.gif)

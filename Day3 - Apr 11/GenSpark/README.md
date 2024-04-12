@@ -19,3 +19,6 @@ This repository has solutions for day 3 exercises of GenSpark training. They are
 ## How to Run
 
 You need .NET 6 to run these applications. After installing, use the `dotnet run` command in the terminal from the project directory.
+
+## Demo
+![Demo](./Recording%202024-04-12%20170535%20(2).gif)
