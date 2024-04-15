@@ -20,6 +20,7 @@ namespace CRUDApp
             Console.WriteLine("4. Update Employee");
             Console.WriteLine("5. Delete Employee");
             Console.WriteLine("6. Play Game");
+            Console.WriteLine("7.Repeating Number");
             Console.WriteLine("0. Exit \n\n ");
         }
 
@@ -76,6 +77,9 @@ namespace CRUDApp
                         break;
                     case 6:
                         Game.GuessGame();
+                        break;
+                    case 7:
+                        RepeatingNumbers.Problem();
                         break;
                     default:
                         Console.WriteLine("Invalid choice. Try again");
