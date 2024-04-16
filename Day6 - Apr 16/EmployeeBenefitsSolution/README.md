@@ -51,7 +51,7 @@ The `GovtRules` interface is implemented in classes like `ABC` and `XYZ`, which 
 
 ## Demo
 
-
+![Demo](./ezgif-4-580badaa0e.gif)
 
 ## How to Run
 

@@ -10,10 +10,10 @@
         public override double EmployeePF(double basicSalary)
         {
             double employeePF = basicSalary * 0.12;
-            double employerContribution = basicSalary * 0.0833;
+            //double employerContribution = basicSalary * 0.0833;
             double pensionFund = basicSalary * 0.0367;
 
-            return employeePF + employerContribution + pensionFund;
+            return basicSalary - (employeePF + pensionFund);
         }
 
         public override string LeaveDetails()
