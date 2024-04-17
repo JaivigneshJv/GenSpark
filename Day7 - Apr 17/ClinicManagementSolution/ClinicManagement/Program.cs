@@ -141,6 +141,7 @@ namespace ClinicManagementConsoleApp
             {
                 Console.WriteLine($"ID: {doctor.Id}, Name: {doctor.Name}, Specialty: {doctor.Specialty}, Contact: {doctor.Contact}, Availability: {doctor.Availability}");
             }
+            ClearConsole();
         }
 
         private void UpdateDoctor()
