@@ -9,7 +9,6 @@
         public int OccupancyCapacity { get; set; }
         public decimal NightlyRate { get; set; }
         public bool IsAvailable { get; set; }
-        public List<Reservation> Reservations { get; }
 
         public Room(int id, string name, string type, string features, int occupancyCapacity, decimal nightlyRate)
         {
@@ -20,17 +19,7 @@
             OccupancyCapacity = occupancyCapacity;
             NightlyRate = nightlyRate;
             IsAvailable = true;
-            Reservations = new List<Reservation>();
         }
 
-        public void Book()
-        {
-            IsAvailable = false;
-        }
-
-        public void CancelBooking()
-        {
-            IsAvailable = true;
-        }
     }
 }

@@ -22,15 +22,5 @@
             CancellationPolicy = cancellationPolicy ?? throw new ArgumentNullException(nameof(cancellationPolicy));
             Status = "Pending";
         }
-
-        public void Confirm()
-        {
-            Status = "Confirmed";
-        }
-
-        public void Cancel()
-        {
-            Status = "Cancelled";
-        }
     }
 }
