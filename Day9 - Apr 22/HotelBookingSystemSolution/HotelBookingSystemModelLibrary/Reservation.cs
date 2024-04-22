@@ -1,17 +1,15 @@
-﻿using System;
-
-namespace HotelBookingSystemModelLibrary
+﻿namespace HotelBookingSystemModelLibrary
 {
     public class Reservation
     {
-        public int Id { get; }
-        public int RoomId { get; }
-        public int GuestId { get; }
-        public DateTime CheckInDate { get; }
-        public DateTime CheckOutDate { get; }
-        public decimal TotalCost { get; }
-        public string CancellationPolicy { get; }
-        public string Status { get; private set; } 
+        public int Id { get; set; }
+        public int RoomId { get; set; }
+        public int GuestId { get; set; }
+        public DateTime CheckInDate { get; set; }
+        public DateTime CheckOutDate { get; set; }
+        public decimal TotalCost { get; set; }
+        public string CancellationPolicy { get; set; }
+        public string Status { get; set; } 
 
         public Reservation(int id, int roomId, int guestId, DateTime checkInDate, DateTime checkOutDate, decimal totalCost, string cancellationPolicy)
         {

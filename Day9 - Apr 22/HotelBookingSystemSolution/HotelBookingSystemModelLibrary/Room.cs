@@ -3,12 +3,12 @@
     public class Room
     {
         public int Id { get; }
-        public string Name { get; }
-        public string Type { get; }
-        public string Features { get; }
-        public int OccupancyCapacity { get; }
-        public decimal NightlyRate { get; }
-        public bool IsAvailable { get; private set; }
+        public string Name { get; set; }
+        public string Type { get; set; }
+        public string Features { get; set; }
+        public int OccupancyCapacity { get; set; }
+        public decimal NightlyRate { get; set; }
+        public bool IsAvailable { get; set; }
         public List<Reservation> Reservations { get; }
 
         public Room(int id, string name, string type, string features, int occupancyCapacity, decimal nightlyRate)
@@ -27,7 +27,7 @@
         {
             IsAvailable = false;
         }
-        
+
         public void CancelBooking()
         {
             IsAvailable = true;

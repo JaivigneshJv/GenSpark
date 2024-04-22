@@ -2,12 +2,12 @@
 {
     public class Guest
     {
-        public int Id { get; }
-        public string Name { get; }
-        public string Contact { get; }
-        public string Email { get; }
-        public List<Reservation> Reservations { get; }
-        public List<string> Preferences { get; }
+        public int Id { get; set; }
+        public string Name { get; set; }
+        public string Contact { get; set; }
+        public string Email { get; set; }
+        public List<Reservation> Reservations { get; set; }
+        public List<string> Preferences { get; set; }
 
         public Guest(int id, string name, string contact, string email)
         {

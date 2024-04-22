@@ -6,4 +6,9 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\HotelBookingSystemDALLibrary\HotelBookingSystemDALLibrary.csproj" />
+    <ProjectReference Include="..\HotelBookingSystemModelLibrary\HotelBookingSystemModelLibrary.csproj" />
+  </ItemGroup>
+
 </Project>
