@@ -1,12 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
+﻿using HotelBookingSystemModelLibrary;
 namespace HotelBookingSystemBLLibrary
 {
-    internal class IGuestService
+    public interface IGuestService
     {
+        IEnumerable<Guest> GetAllGuests();
+        Guest GetGuestById(int id);
+        void AddGuest(Guest guest);
+        void UpdateGuest(Guest guest);
+        void DeleteGuest(int id);
     }
 }

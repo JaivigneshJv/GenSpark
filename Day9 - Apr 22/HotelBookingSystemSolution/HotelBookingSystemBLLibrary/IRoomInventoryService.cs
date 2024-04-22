@@ -1,12 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
+﻿using HotelBookingSystemModelLibrary;
 namespace HotelBookingSystemBLLibrary
 {
-    internal class IRoomInventoryService
+    public interface IRoomInventoryService
     {
+        IEnumerable<Room> GetAllRooms();
+        Room GetRoomById(int id);
+        void AddRoom(Room room);
+        void UpdateRoom(Room room);
+        void DeleteRoom(int id);
     }
 }

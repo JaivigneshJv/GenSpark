@@ -7,4 +7,9 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\HotelBookingSystemBLLibrary\HotelBookingSystemBLLibrary.csproj" />
+    <ProjectReference Include="..\HotelBookingSystemModelLibrary\HotelBookingSystemModelLibrary.csproj" />
+  </ItemGroup>
+
 </Project>

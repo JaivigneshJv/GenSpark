@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-
-namespace HotelBookingSystemModelLibrary
+﻿namespace HotelBookingSystemModelLibrary
 {
     public interface IRepository<T>
     {
