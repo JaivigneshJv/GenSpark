@@ -9,6 +9,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\HotelBookingSystemBLLibrary\HotelBookingSystemBLLibrary.csproj" />
+    <ProjectReference Include="..\HotelBookingSystemDALLibrary\HotelBookingSystemDALLibrary.csproj" />
     <ProjectReference Include="..\HotelBookingSystemModelLibrary\HotelBookingSystemModelLibrary.csproj" />
   </ItemGroup>
 
