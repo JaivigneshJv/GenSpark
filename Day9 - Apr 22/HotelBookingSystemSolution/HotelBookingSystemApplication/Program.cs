@@ -79,11 +79,11 @@ namespace HotelBookingSystem
                     //ENUM MANIPULATION
                     if(user.UserType==UserType.Guest)
                     {
-                        ShowMainMenu();
+                       ShowGuestMainMenu();
                     }
-                    else if (user.UserType == UserType.RoomOwner)
+                   else if (user.UserType == UserType.RoomOwner)
                     {
-                        ShowMainMenu();
+                        ShowRoomOwnerMainMenu();
                     }
                 }
                 else
@@ -108,10 +108,10 @@ namespace HotelBookingSystem
                 Console.WriteLine("Enter your password:");
                 string? password = Console.ReadLine();
 
-                Console.WriteLine("Choose your user type (1 for Guest, 2 for RoomOwner):");
-                UserType userType;
-                if (Enum.TryParse(Console.ReadLine(), out userType))
+                Console.WriteLine("Choose your user type (0 for Guest, 1 for RoomOwner):");
+                if (Enum.TryParse(Console.ReadLine(), out UserType userType))
                 {
+                    Console.WriteLine("User Type: " + userType);
                     var newUser = new Login { Username = username, Password = password, UserType = userType };
                     loginService?.AddLogin(newUser);
 
@@ -125,25 +125,27 @@ namespace HotelBookingSystem
             }
         }
 
-        static void ShowMainMenu()
+        static void ShowGuestMainMenu()
         {
             while (true)
             {
-                MainMenu();
+                Console.Clear();
+                Console.WriteLine("\nMain Menu:");
+                Console.WriteLine("1. Reservation Management");
+                Console.WriteLine("2. Guest Management");
+                Console.WriteLine("3. Exit");
+                Console.WriteLine("Choose an option:");
                 string? input = Console.ReadLine();
 
                 switch (input)
                 {
                     case "1":
-                        RoomManagement();
-                        break;
-                    case "2":
                         ReservationManagement();
                         break;
-                    case "3":
+                    case "2":
                         GuestManagement();
                         break;
-                    case "4":
+                    case "3":
                         Console.WriteLine("Exiting to Login Page!.");
                         ClearConsole();
                         return;
@@ -154,17 +156,77 @@ namespace HotelBookingSystem
                 }
             }
         }
-
-        static void MainMenu()
+        static void ShowRoomOwnerMainMenu()
         {
-            Console.Clear();
-            Console.WriteLine("\nMain Menu:");
-            Console.WriteLine("1. Room Management");
-            Console.WriteLine("2. Reservation Management");
-            Console.WriteLine("3. Guest Management");
-            Console.WriteLine("4. Exit");
-            Console.WriteLine("Choose an option:");
+            while (true)
+            {
+                Console.Clear();
+                Console.WriteLine("\nMain Menu:");
+                Console.WriteLine("1. Reservation Management");
+                Console.WriteLine("2. Room Management");
+                Console.WriteLine("3. Exit");
+                Console.WriteLine("Choose an option:");
+                string? input = Console.ReadLine();
+
+                switch (input)
+                {
+                    case "2":
+                        RoomManagement();
+                        break;
+                    case "1":
+                        ReservationManagement();
+                        break;
+                    case "3":
+                        Console.WriteLine("Exiting to Login Page!.");
+                        ClearConsole();
+                        return;
+                    default:
+                        ClearConsole();
+                        Console.WriteLine("Invalid option. Please try again.");
+                        break;
+                }
+            }
         }
+        //static void ShowMainMenu()
+        //{
+        //    while (true)
+        //    {
+        //        MainMenu();
+        //        string? input = Console.ReadLine();
+
+        //        switch (input)
+        //        {
+        //            case "1":
+        //                RoomManagement();
+        //                break;
+        //            case "2":
+        //                ReservationManagement();
+        //                break;
+        //            case "3":
+        //                GuestManagement();
+        //                break;
+        //            case "4":
+        //                Console.WriteLine("Exiting to Login Page!.");
+        //                ClearConsole();
+        //                return;
+        //            default:
+        //                ClearConsole();
+        //                Console.WriteLine("Invalid option. Please try again.");
+        //                break;
+        //        }
+        //    }
+        //}
+
+        //static void MainMenu()
+        //{
+        //    Console.Clear();
+        //    Console.WriteLine("\nMain Menu:");
+        //    Console.WriteLine("1. Room Management");
+        //    Console.WriteLine("2. Reservation Management");
+        //    Console.WriteLine("3. Guest Management");
+        //    Console.WriteLine("4. Exit");
+        //    Console.WriteLine("Choose an option:");
+        //}
 
         static void RoomManagementMenu()
         {
