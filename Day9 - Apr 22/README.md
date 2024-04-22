@@ -28,6 +28,9 @@ Enable guests to search for available rooms based on their desired check-in and 
 ### Guest Management
 Maintain records of guests including contact details, reservation history, and preferences. Implement functionality for guests to view their reservation details, modify bookings, or cancel reservations.
 
+## Demo
+
+![Demo](./ezgif-3-bfea245657.gif)
 
 ## Getting Started
 
