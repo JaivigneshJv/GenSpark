@@ -8,10 +8,16 @@ namespace ClinicManagementBLLibrary
     public class AppointmentService : IAppointmentService
     {
         private readonly IRepository<int, Appointment> _appointmentRepository;
+        private IRepository<int, Appointment> @object;
 
         public AppointmentService()
         {
             _appointmentRepository = new AppointmentRepository();
+        }
+
+        public AppointmentService(IRepository<int, Appointment> @object)
+        {
+            this.@object = @object;
         }
 
         public int AddAppointment(Appointment appointment)

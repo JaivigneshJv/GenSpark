@@ -3,13 +3,15 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.9.34723.18
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ClinicManagement", "ClinicManagement\ClinicManagement.csproj", "{3235D82C-F439-43D9-8575-11E19AB5EA9D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ClinicManagement", "ClinicManagement\ClinicManagement.csproj", "{3235D82C-F439-43D9-8575-11E19AB5EA9D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ClinicManagementModelLibrary", "ClinicManagementModelLibrary\ClinicManagementModelLibrary.csproj", "{9A0868AA-092C-48E3-8974-58022D567AFD}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ClinicManagementModelLibrary", "ClinicManagementModelLibrary\ClinicManagementModelLibrary.csproj", "{9A0868AA-092C-48E3-8974-58022D567AFD}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ClinicManagementDALLibrary", "ClinicManagementDALLibrary\ClinicManagementDALLibrary.csproj", "{7307C0A9-8A9E-438F-8E7C-48BB327F2378}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ClinicManagementDALLibrary", "ClinicManagementDALLibrary\ClinicManagementDALLibrary.csproj", "{7307C0A9-8A9E-438F-8E7C-48BB327F2378}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ClinicManagementBLLibrary", "ClinicManagementBLLibrary\ClinicManagementBLLibrary.csproj", "{80C64018-F97E-42E3-A589-9676891AEF98}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ClinicManagementBLLibrary", "ClinicManagementBLLibrary\ClinicManagementBLLibrary.csproj", "{80C64018-F97E-42E3-A589-9676891AEF98}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ClinicManagementBLTest", "ClinicManagementBLTest\ClinicManagementBLTest.csproj", "{025E119A-5965-46E1-A969-030AD07A020D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,6 +35,10 @@ Global
 		{80C64018-F97E-42E3-A589-9676891AEF98}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{80C64018-F97E-42E3-A589-9676891AEF98}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{80C64018-F97E-42E3-A589-9676891AEF98}.Release|Any CPU.Build.0 = Release|Any CPU
+		{025E119A-5965-46E1-A969-030AD07A020D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{025E119A-5965-46E1-A969-030AD07A020D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{025E119A-5965-46E1-A969-030AD07A020D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{025E119A-5965-46E1-A969-030AD07A020D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

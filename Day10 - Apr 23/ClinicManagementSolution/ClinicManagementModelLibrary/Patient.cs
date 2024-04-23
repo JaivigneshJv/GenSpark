@@ -7,7 +7,7 @@
         public DateTime DateOfBirth { get; set; }
         public string? Contact { get; set; } = string.Empty;
         public string? Address { get; set; } = string.Empty;
-
+     
         public Patient( string? name, DateTime dateOfBirth, string? contact, string? address)
         {
             //Id = -1;
@@ -15,6 +15,10 @@
             DateOfBirth = dateOfBirth;
             Contact = contact;
             Address = address;
+        }
+
+        public Patient()
+        {
         }
     }
 }
