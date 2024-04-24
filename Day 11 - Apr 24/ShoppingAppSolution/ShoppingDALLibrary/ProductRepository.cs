@@ -4,19 +4,34 @@ namespace ShoppingDALLibrary
 {
     public class ProductRepository : AbstractRepository<int, Product>
     {
+
         public override Product Delete(int key)
         {
-            throw new NotImplementedException();
+            Product product = GetByKey(key);
+            if (product != null)
+            {
+                items.Remove(product);
+            }
+            return product!;
         }
 
         public override Product GetByKey(int key)
         {
-            throw new NotImplementedException();
+            Product? product = items.FirstOrDefault(p => p.Id == key);
+            return product!;
         }
 
         public override Product Update(Product item)
         {
-            throw new NotImplementedException();
+            Product existingProduct = GetByKey(item.Id);
+            if (existingProduct != null)
+            {
+                existingProduct.Name = item.Name;
+                existingProduct.Price = item.Price;
+                existingProduct.QuantityInHand = item.QuantityInHand;
+                existingProduct.Image = item.Image;
+            }
+            return existingProduct!;
         }
     }
 }
