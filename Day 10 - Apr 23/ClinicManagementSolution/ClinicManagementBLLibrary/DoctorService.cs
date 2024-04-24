@@ -7,10 +7,16 @@ namespace ClinicManagementBLLibrary
     public class DoctorService : IDoctorService
     {
         private readonly IRepository<int, Doctor> _doctorRepository;
+        private IRepository<int, Doctor> @object;
 
         public DoctorService()
         {
             _doctorRepository = new DoctorRepository();
+        }
+
+        public DoctorService(IRepository<int, Doctor> @object)
+        {
+            this.@object = @object;
         }
 
         public int AddDoctor(Doctor doctor)

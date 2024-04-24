@@ -17,7 +17,7 @@ namespace ShoppingDALLibrary
 
         public override Product GetByKey(int key)
         {
-            Product? product = items.FirstOrDefault(p => p.Id == key);
+            Product ? product = items.FirstOrDefault(p => p.Id == key);
             return product!;
         }
 
