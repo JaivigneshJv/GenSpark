@@ -7,6 +7,17 @@ namespace ShoppingDALLibrary
 {
     public class CartItemRepository : AbstractRepository<int, CartItem>
     {
+        private List<CartItem> @object;
+
+        public CartItemRepository()
+        {
+        }
+
+        public CartItemRepository(List<CartItem> @object)
+        {
+            this.@object = @object;
+        }
+
         public override CartItem Delete(int key)
         {
             CartItem cartItem = GetByKey(key);

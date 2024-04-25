@@ -5,6 +5,17 @@ namespace ShoppingDALLibrary
 {
     public class CustomerRepository : AbstractRepository<int, Customer>
     {
+        private List<Customer> items1;
+
+        public CustomerRepository()
+        {
+        }
+
+        public CustomerRepository(List<Customer> items1)
+        {
+            this.items1 = items1;
+        }
+
         public override Customer Add(Customer item)
         {
             items.Add(item);
