@@ -9,6 +9,7 @@ namespace ShoppingDALLibrary
 
         public ProductRepository()
         {
+            items1 = new List<Product>();
         }
 
         public ProductRepository(List<Product> items1)
@@ -16,39 +17,39 @@ namespace ShoppingDALLibrary
             this.items1 = items1;
         }
 
-        public override Product Add(Product item)
+        public override Task<Product> Add(Product item)
         {
-            items.Add(item);
-            return item;
+            items1.Add(item);
+            return Task.FromResult(item);
         }
 
-        public override Product Delete(int key)
+        public override async Task<Product> Delete(int key)
         {
-            Product product = GetByKey(key);
-            items.Remove(product);
+            Product product = await GetByKey(key);
+            items1.Remove(product);
             return product;
         }
 
-        public override ICollection<Product> GetAll()
+        public override Task<ICollection<Product>> GetAll()
         {
-            return items.ToList();
+            return Task.FromResult<ICollection<Product>>(items1.ToList());
         }
 
-        public override Product GetByKey(int key)
+        public override Task<Product> GetByKey(int key)
         {
-            Product product = items.FirstOrDefault(p => p.Id == key);
+            Product product = items1.FirstOrDefault(p => p.Id == key);
             if (product == null)
                 throw new NoCustomerWithGiveIdException();
-            return product;
+            return Task.FromResult(product);
         }
 
-        public override Product Update(Product item)
+        public override Task<Product> Update(Product item)
         {
-            int index = items.ToList().FindIndex(p => p.Id == item.Id);
+            int index = items1.ToList().FindIndex(p => p.Id == item.Id);
             if (index == -1)
                 throw new NoCustomerWithGiveIdException();
-            items[index] = item;
-            return item;
+            items1[index] = item;
+            return Task.FromResult(item);
         }
     }
 }

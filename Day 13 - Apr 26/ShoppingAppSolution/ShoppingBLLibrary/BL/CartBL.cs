@@ -8,25 +8,22 @@ namespace ShoppingBLLibrary.BL
 {
     public class CartBL : ICartService
     {
-
         private const double SHIPPING_CHARGE = 100.00;
         private const double DISCOUNT_PERCENTAGE = 0.05;
 
         private readonly IRepository<int, Cart> _cartRepository;
 
-  
         public CartBL()
         {
             _cartRepository = new CartRepository();
         }
-
 
         public CartBL(IRepository<int, Cart> cartRepository)
         {
             _cartRepository = cartRepository;
         }
 
-        public int AddCart(Cart cart)
+        public async Task<int> AddCart(Cart cart)
         {
             if (cart == null)
             {
@@ -35,33 +32,33 @@ namespace ShoppingBLLibrary.BL
 
             ProccessCart(cart);
 
-            Cart addedCart = _cartRepository.Add(cart);
+            Cart addedCart = await _cartRepository.Add(cart);
             return addedCart.Id;
         }
 
-        public Cart DeleteCart(int id)
+        public async Task<Cart> DeleteCart(int id)
         {
-            Cart deletedCart = _cartRepository.Delete(id);
+            Cart deletedCart = await _cartRepository.Delete(id);
             return deletedCart ?? throw new CartNotFoundException();
         }
 
-        public List<Cart> GetAllCarts()
+        public async Task<List<Cart>> GetAllCarts()
         {
-            List<Cart> carts = _cartRepository.GetAll().ToList();
+            ICollection<Cart> carts = await _cartRepository.GetAll();
             if (carts.Count == 0)
             {
                 throw new CartNotFoundException();
             }
-            return carts;
+            return carts.ToList();
         }
 
-        public Cart GetCartById(int id)
+        public async Task<Cart> GetCartById(int id)
         {
-            Cart cart = _cartRepository.GetByKey(id);
+            Cart cart = await _cartRepository.GetByKey(id);
             return cart ?? throw new CartNotFoundException();
         }
 
-        public Cart UpdateCart(Cart cart)
+        public async Task<Cart> UpdateCart(Cart cart)
         {
             if (cart == null)
             {
@@ -70,12 +67,12 @@ namespace ShoppingBLLibrary.BL
 
             ProccessCart(cart);
 
-            Cart updatedCart = _cartRepository.Update(cart);
+            Cart updatedCart = await _cartRepository.Update(cart);
             return updatedCart ?? throw new CartNotFoundException();
         }
+
         private static void ProccessCart(Cart cart)
         {
-         
             double totalPrice = 0;
             foreach (var item in cart.CartItems)
             {
@@ -84,12 +81,12 @@ namespace ShoppingBLLibrary.BL
 
             if (totalPrice < 100)
             {
-                totalPrice += SHIPPING_CHARGE; 
+                totalPrice += SHIPPING_CHARGE;
             }
 
             if (cart.CartItems.Count == 3 && totalPrice >= 1500)
             {
-                totalPrice -= totalPrice * DISCOUNT_PERCENTAGE; 
+                totalPrice -= totalPrice * DISCOUNT_PERCENTAGE;
             }
 
             foreach (var item in cart.CartItems)

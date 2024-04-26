@@ -9,6 +9,7 @@ namespace ShoppingDALLibrary
 
         public CartRepository()
         {
+            items1 = new List<Cart>();
         }
 
         public CartRepository(List<Cart> items1)
@@ -16,39 +17,39 @@ namespace ShoppingDALLibrary
             this.items1 = items1;
         }
 
-        public override Cart Add(Cart item)
+        public override Task<Cart> Add(Cart item)
         {
-            items.Add(item);
-            return item;
+            items1.Add(item);
+            return Task.FromResult(item);
         }
 
-        public override Cart Delete(int key)
+        public override async Task<Cart> Delete(int key)
         {
-            Cart cart = GetByKey(key);
-            items.Remove(cart);
+            Cart cart = await GetByKey(key);
+            items1.Remove(cart);
             return cart;
         }
 
-        public override ICollection<Cart> GetAll()
+        public override Task<ICollection<Cart>> GetAll()
         {
-            return items.ToList();
+            return Task.FromResult<ICollection<Cart>>(items1.ToList());
         }
 
-        public override Cart GetByKey(int key)
+        public override Task<Cart> GetByKey(int key)
         {
-            Cart cart = items.FirstOrDefault(c => c.Id == key);
+            Cart cart = items1.FirstOrDefault(c => c.Id == key);
             if (cart == null)
                 throw new NoCustomerWithGiveIdException();
-            return cart;
+            return Task.FromResult(cart);
         }
 
-        public override Cart Update(Cart item)
+        public override Task<Cart> Update(Cart item)
         {
-            int index = items.ToList().FindIndex(c => c.Id == item.Id);
+            int index = items1.ToList().FindIndex(c => c.Id == item.Id);
             if (index == -1)
                 throw new NoCustomerWithGiveIdException();
-            items[index] = item;
-            return item;
+            items1[index] = item;
+            return Task.FromResult(item);
         }
     }
 }

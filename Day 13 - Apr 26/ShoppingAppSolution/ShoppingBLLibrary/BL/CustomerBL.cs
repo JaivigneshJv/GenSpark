@@ -9,7 +9,6 @@ namespace ShoppingBLLibrary.BL
     {
         readonly IRepository<int, Customer> _customerRepository;
 
-        
         public CustomerBL()
         {
             _customerRepository = new CustomerRepository();
@@ -17,12 +16,12 @@ namespace ShoppingBLLibrary.BL
 
         public CustomerBL(IRepository<int, Customer> repository)
         {
-
             _customerRepository = repository;
         }
-        public int AddCustomer(Customer customer)
+
+        public async Task<int> AddCustomer(Customer customer)
         {
-            var result = _customerRepository.Add(customer);
+            var result = await _customerRepository.Add(customer);
             if (result != null)
             {
                 return result.Id;
@@ -30,9 +29,9 @@ namespace ShoppingBLLibrary.BL
             throw new NoCustomerWithGiveIdException();
         }
 
-        public Customer DeleteCustomer(int id)
+        public async Task<Customer> DeleteCustomer(int id)
         {
-            var result = _customerRepository.Delete(id);
+            var result = await _customerRepository.Delete(id);
             if (result != null)
             {
                 return result;
@@ -40,9 +39,9 @@ namespace ShoppingBLLibrary.BL
             throw new NoCustomerWithGiveIdException();
         }
 
-        public List<Customer> GetAllCustomers()
+        public async Task<List<Customer>> GetAllCustomers()
         {
-            var result = _customerRepository.GetAll();
+            var result = await _customerRepository.GetAll();
             if (result != null)
             {
                 return result.ToList();
@@ -50,9 +49,9 @@ namespace ShoppingBLLibrary.BL
             throw new NoCustomerWithGiveIdException();
         }
 
-        public Customer GetCustomerById(int id)
+        public async Task<Customer> GetCustomerById(int id)
         {
-            var result = _customerRepository.GetByKey(id);
+            var result = await _customerRepository.GetByKey(id);
             if (result != null)
             {
                 return result;
@@ -60,9 +59,9 @@ namespace ShoppingBLLibrary.BL
             throw new NoCustomerWithGiveIdException();
         }
 
-        public Customer UpdateCustomer(Customer customer)
+        public async Task<Customer> UpdateCustomer(Customer customer)
         {
-            var result = _customerRepository.Update(customer);
+            var result = await _customerRepository.Update(customer);
             if (result != null)
             {
                 return result;

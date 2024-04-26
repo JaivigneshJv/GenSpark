@@ -4,21 +4,21 @@
     {
         protected IList<T> items = new List<T>();
 
-        public virtual T Add(T item)
+        public virtual Task<T> Add(T item)
         {
             items.Add(item);
-            return item;
+            return Task.FromResult(item);
         }
 
-        public virtual ICollection<T> GetAll()
+        public virtual Task<ICollection<T>> GetAll()
         {
-            return items;
+            return Task.FromResult((ICollection<T>)items);
         }
 
-        public abstract T Delete(K key);
+        public abstract Task<T> Delete(K key);
 
-        public abstract T GetByKey(K key);
+        public abstract Task<T> GetByKey(K key);
 
-        public abstract T Update(T item);
+        public abstract Task<T> Update(T item);
     }
 }

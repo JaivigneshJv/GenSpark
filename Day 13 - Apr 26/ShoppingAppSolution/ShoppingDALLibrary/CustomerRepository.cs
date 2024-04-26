@@ -5,50 +5,54 @@ namespace ShoppingDALLibrary
 {
     public class CustomerRepository : AbstractRepository<int, Customer>
     {
-        private List<Customer> items1;
+        private List<Customer> customers;
 
         public CustomerRepository()
         {
+            customers = new List<Customer>();
         }
 
-        public CustomerRepository(List<Customer> items1)
+        public override async Task<Customer> Add(Customer item)
         {
-            this.items1 = items1;
-        }
-
-        public override Customer Add(Customer item)
-        {
-            items.Add(item);
+            customers.Add(item);
             return item;
         }
 
-        public override Customer Delete(int key)
+        public override async Task<Customer> Delete(int key)
         {
-            Customer customer = GetByKey(key);
-            items.Remove(customer);
-            return customer;
+            Customer customer = await GetByKey(key);
+            if (customer != null)
+            {
+                customers.Remove(customer);
+                return customer;
+            }
+            throw new NoCartItemWithGivenIdException();
         }
 
-        public override ICollection<Customer> GetAll()
+        public override async Task<ICollection<Customer>> GetAll()
         {
-            return items.ToList();
+            return customers;
         }
 
-        public override Customer GetByKey(int key)
+        public override async Task<Customer> GetByKey(int key)
         {
-            Customer customer = items.FirstOrDefault(c => c.Id == key);
-            if (customer == null)
-                throw new NoCustomerWithGiveIdException();
-            return customer;
+            Customer customer = customers.Find(c => c.Id == key);
+            if (customer != null)
+            {
+                return customer;
+            }
+            throw new NoCustomerWithGiveIdException();
         }
 
-        public override Customer Update(Customer item)
+        public override async Task<Customer> Update(Customer item)
         {
-            int index = items.ToList().FindIndex(c => c.Id == item.Id);
-            if (index == -1)
-                throw new NoCustomerWithGiveIdException();
-            items[index] = item;
-            return item;
+            Customer customer = await GetByKey(item.Id);
+            if (customer != null)
+            {
+                customer = item;
+                return customer;
+            }
+            throw new NoCustomerWithGiveIdException();
         }
     }
 }

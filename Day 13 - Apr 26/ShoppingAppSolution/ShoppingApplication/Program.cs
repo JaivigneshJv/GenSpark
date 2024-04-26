@@ -7,7 +7,7 @@ namespace ShoppingSystem
 {
     class Program
     {
-        static async Task Main(string[] args)
+        static async Task Main()
         {
             IProductService productService = new ProductBL();
             ICustomerService customerService = new CustomerBL();
@@ -119,7 +119,7 @@ namespace ShoppingSystem
 
                         try
                         {
-                            int productId =  productService.AddProduct(product);
+                            int productId = await productService.AddProduct(product);
                             Console.WriteLine($"Product with Id {productId} added successfully.");
                         }
                         catch (NoProductWithGivenIdException ex)
@@ -151,7 +151,7 @@ namespace ShoppingSystem
             {
                 try
                 {
-                    Product deletedProduct =  productService.DeleteProduct(id);
+                    Product deletedProduct = await productService.DeleteProduct(id);
                     Console.WriteLine($"Product with Id {deletedProduct.Id} deleted successfully.");
                 }
                 catch (NoProductWithGivenIdException ex)
@@ -167,7 +167,7 @@ namespace ShoppingSystem
 
         static async Task ViewAllProducts(IProductService productService)
         {
-            List<Product> products =  productService.GetAllProducts();
+            List<Product> products = await productService.GetAllProducts();
             Console.WriteLine("List of Products:");
             foreach (var product in products)
             {
@@ -243,7 +243,7 @@ namespace ShoppingSystem
 
                     try
                     {
-                        int customerId =  customerService.AddCustomer(customer);
+                        int customerId = await customerService.AddCustomer(customer);
                         Console.WriteLine($"Customer with Id {customerId} added successfully.");
                     }
                     catch (Exception ex)
@@ -270,7 +270,7 @@ namespace ShoppingSystem
             {
                 try
                 {
-                    Customer deletedCustomer =  customerService.DeleteCustomer(id);
+                    Customer deletedCustomer = await customerService.DeleteCustomer(id);
                     Console.WriteLine($"Customer with Id {deletedCustomer.Id} deleted successfully.");
                 }
                 catch (Exception ex)
@@ -286,7 +286,7 @@ namespace ShoppingSystem
 
         static async Task ViewAllCustomers(ICustomerService customerService)
         {
-            List<Customer> customers =  customerService.GetAllCustomers();
+            List<Customer> customers = await customerService.GetAllCustomers();
             Console.WriteLine("List of Customers:");
             foreach (var customer in customers)
             {
@@ -352,7 +352,7 @@ namespace ShoppingSystem
 
                 try
                 {
-                    int cartId =  cartService.AddCart(cart);
+                    int cartId = await cartService.AddCart(cart);
                     Console.WriteLine($"Cart with Id {cartId} added successfully.");
                 }
                 catch (Exception ex)
@@ -374,7 +374,7 @@ namespace ShoppingSystem
             {
                 try
                 {
-                    Cart deletedCart =  cartService.DeleteCart(id);
+                    Cart deletedCart = await cartService.DeleteCart(id);
                     Console.WriteLine($"Cart with Id {deletedCart.Id} deleted successfully.");
                 }
                 catch (Exception ex)
@@ -390,7 +390,7 @@ namespace ShoppingSystem
 
         static async Task ViewAllCarts(ICartService cartService)
         {
-            List<Cart> carts =  cartService.GetAllCarts();
+            List<Cart> carts = await cartService.GetAllCarts();
             Console.WriteLine("List of Carts:");
             foreach (var cart in carts)
             {
