@@ -42,7 +42,7 @@ Allow customers to checkout their cart. The total cost should include the price 
 
 The application includes comprehensive unit tests to ensure the reliability and correctness of the system. These tests cover all the methods in the business logic layer, ensuring that each function works as expected under various conditions.
 
-To run the unit tests, use the following command:
+To run the unit tests, use the following command: (final)
 
 ```bash
-dotnet test
+dotnet test 
