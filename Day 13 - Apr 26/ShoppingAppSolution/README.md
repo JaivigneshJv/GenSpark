@@ -1,17 +1,17 @@
 # Shopping App
 
 ## Objective
-Develop a console-based shopping application to enable customers to add products to a cart, manage their cart, and checkout.
+Develop a console-based shopping application to enable customers to add products to a cart, manage their cart, and checkout. The application uses asynchronous programming (async/await) in C# for non-blocking operations.
 
 ## Implementation
 
 The system is divided into three layers:
 
-1. **Data Access Layer (DAL)**: This layer contains repositories for `Product`, `Cart`, and `CartItems`. It interacts with the database and performs CRUD operations.
+1. **Data Access Layer (DAL)**: This layer contains repositories for `Product`, `Cart`, and `CartItems`. It interacts with the database and performs CRUD operations asynchronously.
 
-2. **Business Logic Layer (BLL)**: This layer contains the business logic of the application. It interacts with the DAL and transforms data to and from the Models.
+2. **Business Logic Layer (BLL)**: This layer contains the business logic of the application. It interacts with the DAL and transforms data to and from the Models. The BLL uses async/await to ensure that the UI remains responsive while it performs business operations.
 
-3. **Console Application**: This is the entry point of the application. It interacts with the BLL and presents data to the user.
+3. **Console Application**: This is the entry point of the application. It interacts with the BLL and presents data to the user. The console application uses async/await to ensure that it remains responsive while it waits for the BLL to complete its operations.
 
 ## Getting Started
 
@@ -42,9 +42,9 @@ Allow customers to checkout their cart. The total cost should include the price 
 
 The application includes comprehensive unit tests to ensure the reliability and correctness of the system. These tests cover all the methods in the business logic layer, ensuring that each function works as expected under various conditions.
 
-To run the unit tests, use the following command: (final)
-
 ![Testing](./Screenshot%202024-04-26%20174204.jpg)
 
+To run the unit tests, use the following command:
+
 ```bash
-dotnet test 
+dotnet test
