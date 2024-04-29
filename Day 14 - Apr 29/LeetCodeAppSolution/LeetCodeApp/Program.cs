@@ -5,17 +5,10 @@ namespace LeetCodeApp
 {
     public class Program
     {
-        public static void ClearConsole()
-        {
-            Console.WriteLine("Press any key to continue...");
-            Console.ReadKey();
-            Console.Clear();
-        }
-
-        public static void Main()
+        public static async Task Main()
         {
             BinaryTree? binaryTree = null;
-            
+
             while (true)
             {
                 Console.Clear();
@@ -51,7 +44,7 @@ namespace LeetCodeApp
                         }
                         binaryTree = new BinaryTree(rootValue);
                         Console.WriteLine("Binary Tree created successfully.");
-                        ClearConsole();
+                        await ClearConsoleAsync();
                         break;
 
                     case 2:
@@ -69,7 +62,7 @@ namespace LeetCodeApp
                         }
                         binaryTree.Insert(insertValue);
                         Console.WriteLine("Node inserted successfully.");
-                        ClearConsole();
+                        await ClearConsoleAsync();
 
                         break;
 
@@ -81,9 +74,9 @@ namespace LeetCodeApp
                             Console.WriteLine("Binary Tree has not been created yet.");
                             break;
                         }
-                        int minDepth = Solution.MinDepth(binaryTree.root);
+                        int minDepth = await Solution.MinDepth(binaryTree.root);
                         Console.WriteLine($"Minimum depth of the binary tree: {minDepth}");
-                        ClearConsole();
+                        await ClearConsoleAsync();
 
                         break;
 
@@ -97,7 +90,7 @@ namespace LeetCodeApp
                         }
                         Console.WriteLine("Viewing Binary Tree:");
                         binaryTree.ViewTree();
-                        ClearConsole();
+                        await ClearConsoleAsync();
 
                         break;
 
@@ -111,7 +104,7 @@ namespace LeetCodeApp
                             continue;
                         }
                         Console.WriteLine(ExcelSheet.Excel.ExcelColumnTitle(column));
-                        ClearConsole();
+                        await ClearConsoleAsync();
                         break;
 
                     case 6:
@@ -128,28 +121,35 @@ namespace LeetCodeApp
                         }
                         string[]? values = input?.Split(',');
                         ListNode? linkedListHead = LinkedListCycleDetection.CreateLinkedList(values!, pos);
-                        bool hasCycle = LinkedListCycleDetection.HasCycle(linkedListHead!);
+                        bool hasCycle = await LinkedListCycleDetection.HasCycle(linkedListHead!);
                         Console.WriteLine($"Linked List has cycle: {hasCycle}");
-                        ClearConsole();
+                        await ClearConsoleAsync();
                         break;
 
                     case 7:
                         Console.Clear();
                         Console.WriteLine("Exiting the program...");
-                        ClearConsole();
+                        await ClearConsoleAsync();
 
                         return;
 
                     default:
 
                         Console.WriteLine("Invalid choice. Please enter a valid option.");
-                        ClearConsole();
+                        await ClearConsoleAsync();
 
                         break;
                 }
 
                 Console.WriteLine();
             }
+        }
+
+        public static async Task ClearConsoleAsync()
+        {
+            Console.WriteLine("Press any key to continue...");
+            await Task.Run(() => Console.ReadKey());
+            Console.Clear();
         }
     }
 }

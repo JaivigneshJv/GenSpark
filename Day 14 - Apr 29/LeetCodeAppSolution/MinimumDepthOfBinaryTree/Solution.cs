@@ -2,7 +2,7 @@
 {
     public class Solution
     {
-        public static int MinDepth(TreeNode? root)
+        public static async Task<int> MinDepth(TreeNode? root)
         {
             if (root == null)
             {
@@ -14,13 +14,16 @@
             }
             if (root.left == null)
             {
-                return MinDepth(root.right) + 1;
+                return await MinDepth(root.right) + 1;
             }
             if (root.right == null)
             {
-                return MinDepth(root.left) + 1;
+                return await MinDepth(root.left) + 1;
             }
-            return Math.Min(MinDepth(root.left), MinDepth(root.right)) + 1;
+            var leftDepth = MinDepth(root.left);
+            var rightDepth = MinDepth(root.right);
+            await Task.WhenAll(leftDepth, rightDepth);
+            return Math.Min(leftDepth.Result, rightDepth.Result) + 1;
         }
     }
 }
