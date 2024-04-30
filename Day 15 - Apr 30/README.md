@@ -20,6 +20,8 @@ Note: The shop details do not need to be stored.
 
 ![ShopERD](./Assets/diagram-export-30-04-2024-16_19_32.png)
 
+*use dark theme
+
 ### 2. ER Modelling for a Movie Store
 
 Create an ER model for a movie store with the following specifications:
@@ -36,3 +38,17 @@ Create an ER model for a movie store with the following specifications:
 
 ![MovieERD](./Assets/diagram-export-30-04-2024-16_19_13.png)
 
+*use dark theme
+
+
+## Table Schema
+
+Create Tables with Integrity Constrains:
+
+a) EMP (empno - primary key, empname, salary, deptname - references entries in a deptname of department table with null constraint, bossno - references entries in an empno of emp table with null constraint)
+
+b) DEPARTMENT (deptname - primary key, floor, phone, empno - references entries in an empno of emp table not null)
+
+c) SALES (salesno - primary key, saleqty, itemname -references entries in a itemname of item table with not null constraint, deptname - references entries in a deptname of department table with not null constraint)
+
+d) ITEM (itemname - primary key, itemtype, itemcolor)
