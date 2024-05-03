@@ -112,3 +112,10 @@ SELECT t.title, SUM(s.qty * t.price) AS 'total order value'
 FROM sales s
 JOIN titles t ON s.title_id = t.title_id
 GROUP BY t.title;
+
+--15) print the orders that are for the books published by the publisher for which 'Paolo' works for
+SELECT orders.order_id FROM orders
+JOIN titles ON orders.title_id = titles.title_id
+JOIN publishers ON titles.pub_id = publishers.pub_id
+JOIN authors ON publishers.pub_id = authors.pub_id
+WHERE authors.au_fname = 'Paolo';
