@@ -1,6 +1,6 @@
 -- 1) Create a stored procedure that will take the author firstname and print all the books polished by him with the publisher's name
 
-CREATE PROCEDURE proc_GetBooksByAuthor(@FirstName VARCHAR(50))
+ALTER PROCEDURE proc_GetBooksByAuthor(@FirstName VARCHAR(50))
 AS
 BEGIN
     SELECT t.title AS 'Book Title', p.pub_name AS 'Publisher'
@@ -11,10 +11,19 @@ BEGIN
     WHERE a.au_fname = @FirstName;
 END
 
-select * from sales
+select * from authors
 --samples
 EXEC proc_GetBooksByAuthor @FirstName = 'Johnson';
 EXEC proc_GetBooksByAuthor @FirstName = 'Marjorie';
+
+
+
+
+
+
+
+
+
 
 
 -- 2) Create a sp that will take the employee's firtname and print all the titles sold by him/her, price, quantity and the cost.
@@ -23,14 +32,15 @@ ALTER PROCEDURE proc_GetTitlesSoldByEmployee
     @FirstName VARCHAR(20)
 AS
 BEGIN
-    SELECT t.title, s.qty, t.price, s.qty * t.price AS cost
+    SELECT t.title, s.qty, t.price, s.qty * t.price AS cost 
     FROM sales s
     INNER JOIN titles t ON s.title_id = t.title_id
     INNER JOIN employee e ON t.pub_id = e.pub_id
     WHERE e.fname = @FirstName;
+	
 END
 
-EXEC proc_GetTitlesSoldByEmployee @FirstName = 'Annette';
+EXEC proc_GetTitlesSoldByEmployee @FirstName = 'Paolo';
 
 --(or)
 
@@ -45,6 +55,43 @@ BEGIN
     WHERE e.fname LIKE '%' + @Name + '%' OR e.lname LIKE '%' + @Name + '%';
 END
 EXEC proc_GetTitlesSoldByEmployeeALT @Name = 'Ar';
+
+
+-- trial
+alter proc proc_GetTitlesSoldByEmployee(@efname varchar(50))
+as
+begin
+	select t.title, sum(t.price) 'Price', sum(s.qty) 'Quantity'
+	from employee e
+	join titles t on t.pub_id = e.pub_id
+	join sales s on t.title_id = s.title_id
+	where e.fname = @efname
+	group by t.title
+end
+
+exec proc_GetTitlesSoldByEmployee 'Paolo'
+
+ALTER PROC proc_GetTitlesSoldByEmployee(@employee_fname VARCHAR(20))
+AS
+BEGIN
+   SELECT t.title AS 'Book Title', sum(t.price) AS 'Price', sum(s.qty) AS 'Quantity', sum(t.price) * sum(s.qty) AS 'Total Cost' 
+   FROM Employee e
+   JOIN titles t ON t.pub_id = e.pub_id
+   JOIN Sales s ON t.title_id = s.title_id
+   WHERE e.fname = @employee_fname
+   GROUP BY t.title
+   ORDER BY [Total Cost] DESC
+END
+
+EXEC proc_GetTitlesSoldByEmployee 'Paolo'
+
+
+
+
+
+
+
+
 
 -- 3) Create a query that will print all names from authors and employees
 SELECT au_fname AS 'First Name', au_lname AS 'Last Name' FROM authors
@@ -62,7 +109,18 @@ INNER JOIN publishers p ON t.pub_id = p.pub_id
 INNER JOIN titleauthor ta ON t.title_id = ta.title_id
 INNER JOIN authors a ON ta.au_id = a.au_id
 
-
+--
+WITH OrderDataDetails_CTE
+AS 
+(
+   SELECT t.title as 'Book Title', p.pub_name as 'Publisher Name', CONCAT(a.au_fname, ' ' ,a.au_lname) as 'Author Name', s.qty as 'Quantity', (t.price * s.qty) as 'Total Cost'
+   FROM titles t
+   INNER JOIN publishers p ON p.pub_id = t.pub_id
+   INNER JOIN titleauthor ta ON ta.title_id = t.title_id
+   INNER JOIN authors a ON a.au_id = ta.au_id
+   INNER JOIN sales s ON s.title_id = t.title_id
+)
+SELECT TOP 5 * FROM OrderDataDetails_CTE ORDER BY [Total Cost] DESC;
 
 
 
