@@ -6,7 +6,7 @@ Request Tracker is a simple console application designed to help users and admin
 
 - C#: The application is built using C# language.
 - .NET Core/.NET Framework: The project utilizes the .NET Core or .NET Framework depending on the version used.
-- Entity Framework Core: Entity Framework Core is used for database access and management.
+- Entity Framework Core: Entity Framework Core is used for database access and management, following the **code-first approach**.
 - Microsoft SQL Server: The application uses Microsoft SQL Server as the database backend.
 - Console Interface: The user interacts with the application through a console interface.
 
@@ -50,8 +50,31 @@ After logging in, users and admins can perform various actions based on their ro
 - View Feedbacks (Only feedbacks given to them)
 
 
+## Demo
+<details>
+<summary>Creating Requests</summary>
 
-## Migration with Entity Framework
+![](./Assets/ezgif-4-a5fb5fe7bb.gif)
+
+
+</details>
+<details>
+<summary>User Management</summary>
+
+![](./Assets/ezgif-4-26f8dca8fa.gif)
+
+
+</details>
+<details>
+<summary>Admin Management</summary>
+
+![](./Assets/ezgif-4-760d15e1d5.gif)
+
+
+</details>
+
+## Migration with 
+Entity Framework
 
 Entity Framework Core is used for database migrations and management.
 
