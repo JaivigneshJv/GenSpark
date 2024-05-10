@@ -12,7 +12,7 @@ This ERD was developed using pair programming methodology. One, the driver, writ
 The ERD for this system includes the following entities:
 
 
-![ERD](./Assets/Screenshot%20(79).png)
+![ERD](./Screenshot%20(79).png)
 
 
 
