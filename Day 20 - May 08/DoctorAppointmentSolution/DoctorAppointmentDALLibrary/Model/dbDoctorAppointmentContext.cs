@@ -26,7 +26,7 @@ namespace DoctorAppointmentDALLibrary.Model
             if (!optionsBuilder.IsConfigured)
             {
                 var builder = new ConfigurationBuilder()
-                              .AddUserSecrets<RequestTrackerContext>()
+                              .AddUserSecrets<dbDoctorAppointmentContext>()
                               .Build();
                 var connectionString = builder.GetConnectionString("DoctorAppointment");
                 optionsBuilder.UseSqlServer(connectionString); }
