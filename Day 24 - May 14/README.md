@@ -45,5 +45,5 @@ The project is structured as follows:
 
 ## Demo
 
-![](./ezgif-3-4bef4bf52d.gif)
+![](./ClinicManagementSolution/ezgif-3-4bef4bf52d.gif)
 
