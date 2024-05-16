@@ -81,3 +81,8 @@ This is a sample ASP.NET Core Web API project for a pizza ordering system. It de
 - Models: Data structures
 - DTOs: Data transfer objects
 - Mappings: AutoMapper profiles
+
+
+<br>
+
+Extended From [Day 25 - PizzaOrderingAPI](../Day%2025%20-%20May%2015/)
