@@ -50,14 +50,14 @@ Here are some of the key endpoints of the API:
 - **GET /api/employees/{id}**: Get an employee by ID.
 - **POST /api/employees**: Create a new employee (Admin only).
 - **PUT /api/employees/{id}**: Update an employee (Admin only).
-- **DELETE /api/employees/{id}**: Delete an employee (Admin only).
+
 
 ### Requests
 - **GET /api/requests**: Get all requests (Admin only).
 - **GET /api/requests/{id}**: Get a request by ID.
 - **POST /api/requests**: Create a new request (Employee only).
 - **PUT /api/requests/{id}**: Update a request (Employee only).
-- **DELETE /api/requests/{id}**: Delete a request (Admin/Manager only).
+
 
 ## Key Files and Directories
 - **Program.cs**: Entry point of the application.
