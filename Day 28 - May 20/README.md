@@ -14,7 +14,7 @@ To use log4net in your .NET Web API project, follow these steps:
     Install-Package log4net
     ```
 
-2. Add the following configuration to your `app.config` or `web.config` file:
+2. Add the following configuration to your `log4net.config` file:
 
     ```xml
     <log4net>
