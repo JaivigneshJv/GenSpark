@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Marksheet Replica</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+      }
+      .container {
+        width: 800px;
+        margin: 0 auto;
+        border: 1px solid #000;
+        padding: 20px;
+      }
+      .header {
+        text-align: center;
+        border-bottom: 2px solid #000;
+        padding-bottom: 20px;
+      }
+      .header img {
+        width: 80px;
+        display: block;
+        margin: 0 auto;
+      }
+      .header h1 {
+        font-size: 24px;
+        margin: 10px 0;
+      }
+      .header h2 {
+        font-size: 20px;
+        margin: 5px 0;
+      }
+      .details,
+      .marks {
+        width: 100%;
+        margin: 20px 0;
+        border-collapse: collapse;
+      }
+      .details th,
+      .details td,
+      .marks th,
+      .marks td {
+        border: 1px solid #000;
+        padding: 8px;
+        text-align: left;
+      }
+      .marks th {
+        background-color: #f2f2f2;
+      }
+      .footer {
+        text-align: left;
+        margin-top: 20px;
+      }
+      .signature {
+        text-align: right;
+        margin-top: 50px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="header">
+        <div
+          class="logos"
+          style="display: flex; justify-content: space-between">
+          <div class="">
+            <img
+              src="./Assets/certificate/qe.svg"
+              alt="University Logo"
+              width="10"
+              height="100" />
+          </div>
+          <div class="" style="flex: 1">
+            <img
+              src="./Assets/certificate/presidio_logo.png"
+              alt="University Logo"
+              style="display: flex; flex: 1; width: max-content" />
+          </div>
+          <div class="">
+            <img src="./Assets/certificate/pfp.jpg" alt="University Logo" />
+          </div>
+        </div>
+        <br />
+        <br />
+        <h1 style="color: #6e6e9e">PRESIDIO</h1>
+        <h1 style="color: #ff0000">STATEMENT OF MARKS</h1>
+      </div>
+      <table class="details">
+        <tr>
+          <th style="width: 25%">Name</th>
+          <td style="width: 25%">Jaivignesh</td>
+          <th style="width: 25%">Serial No.</th>
+          <td style="width: 25%">123456789</td>
+        </tr>
+        <tr>
+          <th>Course</th>
+          <td>Full Stack Developer</td>
+          <th>Year</th>
+          <td>2024</td>
+        </tr>
+        <tr>
+          <th>Examination</th>
+          <td>August 2024</td>
+          <th>Reg. No.</th>
+          <td>123456789</td>
+        </tr>
+      </table>
+      <h3 style="color: #008000">Semester 1</h3>
+      <table class="marks">
+        <tr>
+          <th>Subject</th>
+          <th>External</th>
+          <th>Internal</th>
+          <th>Total</th>
+          <th>Grade</th>
+        </tr>
+        <tr>
+          <td>C#</td>
+          <td>NAN</td>
+          <td>NAN</td>
+          <td>NAN</td>
+          <td>NAN</td>
+        </tr>
+        <tr>
+          <td>DOTNET 6</td>
+          <td>NAN</td>
+          <td>NAN</td>
+          <td>NAN</td>
+          <td>NAN</td>
+        </tr>
+       
+        <!-- Add more rows as needed -->
+      </table>
+      <h3 style="color: #008000">Semester 2</h3>
+      <table class="marks">
+        <tr>
+          <th>Subject</th>
+          <th>External</th>
+          <th>Internal</th>
+          <th>Total</th>
+          <th>Grade</th>
+        </tr>
+        <tr>
+          <td>SQL</td>
+          <td>NAN</td>
+          <td>NAN</td>
+          <td>NAN</td>
+          <td>NAN</td>
+        </tr>
+        <tr>
+          <td>ASP.NET Core</td>
+          <td>NAN</td>
+          <td>NAN</td>
+          <td>NAN</td>
+          <td>NAN</td>
+        </tr>
+        <!-- Add more rows as needed -->
+      </table>
+      <div class="footer">
+        <p style="font-size: 18px">Result: Pass</p>
+        <p style="font-size: 16px"></p>
+      </div>
+      <table class="marks">
+        <tr>
+          <td>Subject</td>
+          <td>Semester I</td>
+          <td>Semester II</td>
+        </tr>
+        <tr>
+          <td>Full Mark</td>
+          <td>100</td>
+          <td>100</td>
+        </tr>
+        <tr>
+          <td>Mark Obtained</td>
+          <td>NAN</td>
+          <td>NAN</td>
+        </tr>
+        <!-- Add more rows as needed -->
+      </table>
+      <div class="signature">
+        <img
+          src="./Assets/certificate/presidio_logo.png"
+          alt="University Logo"
+          width="100"
+          style="padding-right: 5%" />
+        <p style="font-size: 16px">Controller of Examinations</p>
+      </div>
+    </div>
+  </body>
+</html>
