@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Employee Details Form</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+            overflow-y: auto;
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+
+        h2 {
+            text-align: center;
+            margin: 20px 0;
+        }
+
+        #add-employee-form {
+            width: 80%;
+            margin: 0 auto;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.1);
+        }
+
+        #add-employee-form div {
+            margin-bottom: 10px;
+        }
+
+        #add-employee-form label {
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        #add-employee-form input[type="text"],
+        #add-employee-form input[type="date"],
+        #add-employee-form input[type="tel"],
+        #add-employee-form input[type="email"] {
+            width: 98%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+
+        #add-employee-form .button-container {
+            display: flex;
+            justify-content: flex-end;
+        }
+
+        #add-employee-form button {
+            display: flex;
+            justify-content: flex-end;
+            background-color: #333;
+            color: #fff;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        #add-employee-form button:hover {
+            background-color: #444;
+        }
+
+        #uploadedimage {
+            display: block;
+            max-width: 100%;
+            height: auto;
+            margin: 10px 0;
+        }
+
+        body::-webkit-scrollbar {
+            display: none;
+        }
+    </style>
+</head>
+
+<body>
+
+    <h2>Employee Details Form</h2>
+    <form id="add-employee-form">
+        <div>
+            <label for="name">Name:</label>
+            <input type="text" id="name" name="name" required>
+        </div>
+        <div>
+            <label for="dob">Date of Birth:</label>
+            <input type="date" id="dob" name="dob" required>
+        </div>
+        <div>
+            <label for="phone">Phone:</label>
+            <input type="tel" id="phone" name="phone" required>
+        </div>
+        <div>
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" required>
+        </div>
+        <div>
+            <label for="bloodGroup">Blood Group:</label>
+            <input type="text" id="bloodGroup" name="bloodGroup" required>
+        </div>
+        <div>
+            <label for="address">Address:</label>
+            <input type="text" id="address" name="address" required>
+        </div>
+        <div>
+            <label for="position">Position:</label>
+            <input type="text" id="position" name="position" required>
+        </div>
+        <div>
+            <label for="department">Department:</label>
+            <input type="text" id="department" name="department" required>
+        </div>
+        <div>
+            <label for="dateOfJoining">Date of Joining:</label>
+            <input type="date" id="dateOfJoining" name="dateOfJoining" required>
+        </div>
+        <div>
+            <label for="emergencyContact">Emergency Contact:</label>
+            <input type="text" id="emergencyContact" name="emergencyContact" required>
+        </div>
+        <div>
+            <label>Upload Picture:</label>
+            <button id="upload_widget">
+                Upload file
+            </button>
+        </div>
+        <div class="">
+
+            <img id="uploadedimage" src="">
+            </img>
+        </div>
+        <div class="button-container">
+            <button type="submit">Add Employee</button>
+        </div>
+    </form>
+    <script src="https://upload-widget.cloudinary.com/latest/global/all.js" type="text/javascript"></script>
+
+    <script>
+        var imageUploaded = "";
+        const myWidget = cloudinary.createUploadWidget(
+            {
+                cloudName: "duutlmlfo",
+                uploadPreset: "yozix8qe",
+                cropping: true, //add a cropping step
+                // showAdvancedOptions: true,  //add advanced options (public_id and tag)
+                sources: ["local", "url"], // restrict the upload sources to URL and local files
+                multiple: false,  //restrict upload to a single file
+                folder: "user_images", //upload files to the specified folder
+                tags: ["users", "profile"], //add the given tags to the uploaded files
+                // context: {alt: "user_uploaded"}, //add the given context data to the uploaded files
+                clientAllowedFormats: ["images", "jpg"], //restrict uploading to image files only
+                maxImageFileSize: 2000000,  //restrict file size to less than 2MB
+                maxImageWidth: 200, //Scales the image down to a width of 2000 pixels before uploading
+                // theme: "purple", //change to a purple theme
+            },
+            (error, result) => {
+                if (!error && result && result.event === "success") {
+                    console.log("Done! Here is the image info: ", result.info);
+                    document
+                        .getElementById("uploadedimage")
+                        .setAttribute("src", result.info.secure_url);
+                    imageUploaded = result.info.secure_url;
+                }
+            }
+        );
+        document.getElementById("upload_widget").addEventListener(
+            "click",
+            function () {
+                myWidget.open();
+            },
+            false
+        );
+
+        const employeeData = JSON.parse(localStorage.getItem('employeeData')) ||
+        {
+            1: {
+                name: "John Doe",
+                dob: "January 1, 1990",
+                phone: "123-456-7890",
+                email: "john.doe@example.com",
+                bloodGroup: "O+",
+                address: "1234 Elm Street, Springfield, IL 62704",
+                position: "Software Engineer",
+                department: "IT",
+                dateOfJoining: "June 15, 2015",
+                emergencyContact: "Jane Doe (Spouse) - 987-654-3210",
+                picture: "./media/images/employee1.jpg"
+            },
+            2: {
+                name: "Jane Smith",
+                dob: "February 2, 1985",
+                phone: "098-765-4321",
+                email: "jane.smith@example.com",
+                bloodGroup: "A-",
+                address: "5678 Oak Street, Springfield, IL 62704",
+                position: "Project Manager",
+                department: "Operations",
+                dateOfJoining: "March 10, 2010",
+                emergencyContact: "John Smith (Spouse) - 321-654-9870",
+                picture: "./media/images/employee2.jpg"
+            },
+            3: {
+                name: "Alice Johnson",
+                dob: "March 3, 1978",
+                phone: "555-123-4567",
+                email: "alice.johnson@example.com",
+                bloodGroup: "B+",
+                address: "9101 Pine Street, Springfield, IL 62704",
+                position: "HR Manager",
+                department: "Human Resources",
+                dateOfJoining: "May 20, 2008",
+                emergencyContact: "Bob Johnson (Spouse) - 654-321-0987",
+                picture: "./media/images/employee3.jpg"
+            }
+        };
+        localStorage.setItem('employeeData', JSON.stringify(employeeData));
+        document.getElementById('add-employee-form').addEventListener('submit', function (event) {
+            event.preventDefault();
+
+            const newEmployeeId = Object.keys(employeeData).length + 1;
+            const newEmployee = {
+                name: document.getElementById('name').value,
+                dob: document.getElementById('dob').value,
+                phone: document.getElementById('phone').value,
+                email: document.getElementById('email').value,
+                bloodGroup: document.getElementById('bloodGroup').value,
+                address: document.getElementById('address').value,
+                position: document.getElementById('position').value,
+                department: document.getElementById('department').value,
+                dateOfJoining: document.getElementById('dateOfJoining').value,
+                emergencyContact: document.getElementById('emergencyContact').value,
+                picture: imageUploaded
+            };
+
+            employeeData[newEmployeeId] = newEmployee;
+            localStorage.setItem('employeeData', JSON.stringify(employeeData));
+            window.location.href = 'employees.html';
+        });
+    </script>
+</body>
+
+</html>

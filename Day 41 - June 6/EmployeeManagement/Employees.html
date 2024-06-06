@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Employee Details</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        background-color: #f4f4f4;
+        overflow-y: auto;
+        -ms-overflow-style: none;
+        scrollbar-width: none;
+      }
+
+      body::-webkit-scrollbar {
+        display: none;
+      }
+
+      .container {
+        width: 80%;
+        margin: 0 auto;
+        padding: 20px 0;
+      }
+
+      .content {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+        gap: 80px;
+        background-color: #fff;
+        padding: 20px;
+        box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.1);
+      }
+
+      h2 {
+        color: #333;
+      }
+
+      img {
+        width: 150px;
+        height: 150px;
+        border: 5px solid #333;
+        border-radius: 50%;
+        object-fit: cover;
+        margin-bottom: 30px;
+      }
+      p {
+        margin: 0 0 10px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="content" id="employee-details">
+        <h2>Employee Details</h2>
+        <p>Loading...</p>
+      </div>
+    </div>
+
+    <script>
+      function getQueryParameter(name) {
+        const urlParams = new URLSearchParams(window.location.search);
+        return urlParams.get(name);
+      }
+
+      function loadEmployeeDetails() {
+        const employeeData =
+          JSON.parse(localStorage.getItem("employeeData")) || {};
+
+        console.log(employeeData);
+
+        if (Object.keys(employeeData).length > 0) {
+          const detailsContainer = document.getElementById("employee-details");
+          detailsContainer.innerHTML = "";
+          for (var key in employeeData) {
+            var details = employeeData[key];
+            detailsContainer.innerHTML += `
+            <div>
+                <a href="EmployeeDetails.html?id=${key}">
+                    <img src="${details.picture}" alt="Employee Picture">
+                </a>
+                <p><strong>Name:</strong> ${details.name}</p>
+                <p><strong>Date of Birth:</strong> ${details.dob}</p>
+                <p><strong>Position:</strong> ${details.position}</p>
+                <p><strong>Department:</strong> ${details.department}</p>
+                <p><strong>Emergency Contact:</strong> ${details.emergencyContact}</p>
+            </div>
+                  `;
+          }
+        } else {
+          document.getElementById("employee-details").innerHTML =
+            "<p>Employee not found.</p>";
+        }
+      }
+
+      document.addEventListener("DOMContentLoaded", loadEmployeeDetails);
+    </script>
+  </body>
+</html>

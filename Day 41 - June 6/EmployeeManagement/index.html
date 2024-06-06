@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ABC Corp. Home</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        background-color: #f4f4f4;
+        overflow-y: auto;
+      }
+      body::-webkit-scrollbar {
+        display: none;
+      }
+      header {
+        background-color: #333;
+        color: #fff;
+        padding: 10px 0;
+        text-align: center;
+      }
+
+      nav {
+        background-color: #ddd;
+        padding: 10px 0;
+        margin-bottom: 15px;
+      }
+
+      nav span {
+        margin: 0 10px;
+      }
+
+      nav a {
+        color: #333;
+        text-decoration: none;
+      }
+
+      section {
+        width: 100%;
+        height: 800px;
+      }
+
+      iframe {
+        width: 100%;
+        height: 100%;
+        border: none;
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <h1>ABC Corp</h1>
+    </header>
+    <nav>
+      <span><a href="Home.html" target="main">Home</a></span
+      >&nbsp;&nbsp;|&nbsp;&nbsp;
+      <span><a href="Employees.html" target="main">Employees</a></span
+      >&nbsp;&nbsp;|&nbsp;&nbsp;
+      <span><a href="AddEmployee.html" target="main">New</a></span
+      >&nbsp;&nbsp;|&nbsp;&nbsp;
+    </nav>
+    <section>
+      <iframe name="main" src="Home.html"> </iframe>
+    </section>
+    <header>
+        ABC Company © 2024
+    </header>
+
+    <script>
+      const employeeData = JSON.parse(localStorage.getItem("employeeData")) || {
+        1: {
+          name: "John Doe",
+          dob: "January 1, 1990",
+          phone: "123-456-7890",
+          email: "john.doe@example.com",
+          bloodGroup: "O+",
+          address: "1234 Elm Street, Springfield, IL 62704",
+          position: "Software Engineer",
+          department: "IT",
+          dateOfJoining: "June 15, 2015",
+          emergencyContact: "Jane Doe (Spouse) - 987-654-3210",
+          picture: "./media/images/employee1.jpg",
+        },
+        2: {
+          name: "Jane Smith",
+          dob: "February 2, 1985",
+          phone: "098-765-4321",
+          email: "jane.smith@example.com",
+          bloodGroup: "A-",
+          address: "5678 Oak Street, Springfield, IL 62704",
+          position: "Project Manager",
+          department: "Operations",
+          dateOfJoining: "March 10, 2010",
+          emergencyContact: "John Smith (Spouse) - 321-654-9870",
+          picture: "./media/images/employee2.jpg",
+        },
+        3: {
+          name: "Alice Johnson",
+          dob: "March 3, 1978",
+          phone: "555-123-4567",
+          email: "alice.johnson@example.com",
+          bloodGroup: "B+",
+          address: "9101 Pine Street, Springfield, IL 62704",
+          position: "HR Manager",
+          department: "Human Resources",
+          dateOfJoining: "May 20, 2008",
+          emergencyContact: "Bob Johnson (Spouse) - 654-321-0987",
+          picture: "./media/images/employee3.jpg",
+        },
+      };
+      localStorage.setItem("employeeData", JSON.stringify(employeeData));
+    </script>
+  </body>
+</html>
