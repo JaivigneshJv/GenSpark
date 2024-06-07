@@ -1,0 +1,162 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@100..900&family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap");
+@import "../node_modules/bootstrap/scss/bootstrap.scss";
+$primary-color: #007bff52;
+$danger-color: #dc3545;
+$success-color: #28a745;
+$inactive-color: #6c757d;
+body {
+  font-family: "Inter", sans-serif;
+  overflow: hidden;
+}
+
+#sort-id,
+#sort-name,
+#sort-status {
+  cursor: pointer;
+}
+
+.side-nav-bar {
+  background-color: #151357;
+  height: 100vh;
+  width: 5vw;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 1;
+}
+
+.icon {
+  font-size: 1em;
+  color: white;
+  &-menu {
+    font-size: 1.25em;
+    color: white;
+    border: 1px solid #2a278f;
+    padding: 20%;
+    background-color: #0d0b45;
+    border-radius: 20%;
+  }
+  &-gear {
+    font-size: 1.25em;
+    color: white;
+  }
+  &-pfp {
+    font-size: 1.75em;
+  }
+  &-help {
+    font-size: 1.5em;
+    color: grey;
+  }
+}
+
+.explorer {
+  padding: 1vw;
+}
+
+.settings {
+  margin-top: 1vh;
+}
+
+.navbar-container {
+  width: 100vw;
+  height: 8vh;
+}
+
+.top-navbar {
+  margin-left: 5vw;
+  width: 95vw;
+  height: 8vh;
+  background-color: #f7f9fc;
+  position: fixed;
+  align-items: center;
+  align-content: center;
+  z-index: 1;
+  &-title {
+    font-size: 1.5em;
+    font-family: "Inter", sans-serif;
+    font-weight: 800;
+  }
+  &-count {
+    background-color: #ededfc;
+    border-radius: 40%;
+    padding: 0.2em 0.75em 0.2em 0.75em;
+    text-align: center;
+  }
+}
+
+.action-navbar {
+  margin-left: 5vw;
+  width: 95vw;
+  top: 8vh;
+  height: 10vh;
+  position: fixed;
+}
+.table {
+  overflow: auto;
+}
+.main-content {
+  margin-left: 5vw;
+  width: 95vw;
+  top: 10vh;
+  height: 76vh;
+}
+
+.table thead th {
+  background-color: #f8f9fa;
+}
+
+th {
+  font-weight: 700;
+  font-size: 0.75em;
+  color: grey;
+}
+
+.table tbody td small {
+  display: block;
+  color: #6c757d;
+}
+
+.table .badge-primary {
+  background-color: #f0f1fa;
+  font-weight: 500;
+  color: #4f5aed;
+}
+
+.table .badge-success {
+  background-color: #e1fcef;
+  color: #14804a;
+  font-weight: 500;
+}
+
+.table .badge-danger {
+  font-weight: 500;
+  background-color: #faf0f3;
+  color: #d64267;
+}
+
+.table .badge-secondary {
+  font-weight: 500;
+  background-color: #e9edf5;
+  color: #7d8595;
+}
+
+.table-responsive {
+  overflow-x: auto;
+}
+
+@media (max-width: 768px) {
+  .d-flex {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .d-flex > * {
+    margin-bottom: 1rem;
+  }
+  .navbar-container {
+    display: none;
+  }
+  .side-nav-bar {
+    display: none;
+  }
+}

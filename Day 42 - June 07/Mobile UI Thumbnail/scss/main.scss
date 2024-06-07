@@ -1,0 +1,59 @@
+@import "../node_modules/bootstrap/scss/bootstrap.scss";
+@import url("https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap");
+
+.background {
+  position: relative;
+  background-color: white;
+  height: 100vh;
+  font-family: "Open Sans", sans-serif;
+}
+
+.blue-bg {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: #2f80ed;
+  clip-path: polygon(100% 0, 0 100%, 100% 100%);
+}
+
+.content-container {
+  display: flex;
+  z-index: 1;
+  position: absolute;
+  height: 100vh;
+  width: 100vw;
+}
+.heading-container,
+.image-container {
+  flex: 1;
+}
+.heading {
+  font-size: 4.5em;
+  font-weight: 800;
+  color: #2f80ed;
+  &-container {
+    margin: 1em;
+  }
+}
+.list-container {
+  font-size: 3.5em;
+  font-weight: 800;
+}
+.image-container {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.behind-container {
+  position: absolute;
+  display: flex;
+}
+.front-container {
+  position: absolute;
+  margin-top: 10vh;
+  margin-right: 5vw;
+  display: flex;
+}
