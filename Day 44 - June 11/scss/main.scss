@@ -5,24 +5,27 @@ body {
   font-family: "Inter", sans-serif;
   margin: 0;
   padding: 0;
-  overflow: hidden;
 }
 
 .bg {
   position: relative;
   background-color: #dfe2e4;
   height: 100vh;
+  z-index: 0;
 }
 .bg-image {
+  z-index: 0;
   position: absolute;
   opacity: 0.9;
   top: 15vh;
   right: 0;
+  z-index: -1;
   width: 50vw;
   height: 80vh;
   margin: auto;
 }
 .gray-bg {
+  z-index: 0;
   position: absolute;
   background-color: #e4e7e8;
   top: 0;
@@ -34,12 +37,16 @@ body {
 }
 
 .main-container {
+  position: absolute;
   z-index: 2;
-  color: black;
+  width: 100vw;
+  height: 100vh;
+  top: 0;
+  left: 0;
 }
 .nav-bar {
-  z-index: 2;
   height: 10vh;
+  width: 100vw !important;
 }
 .content-container {
   margin-top: 8vh;
@@ -59,18 +66,28 @@ body {
   width: 8vw;
   text-align: center;
   border-radius: 2em;
+  transition: background-color 0.5s ease, color 0.5s ease; // Add this line
+
   &:hover {
     cursor: pointer;
     background-color: #000;
+    color: white;
   }
 }
 .register-btn {
   display: flex;
   border: 2px solid #000;
   background-color: #000;
+  color: white;
   width: 8vw;
   text-align: center;
   border-radius: 2em;
+  transition: background-color 0.5s ease, color 0.5s ease; // Add this line
+  &:hover {
+    cursor: pointer;
+    background-color: white;
+    color: #000;
+  }
 }
 .box-content {
   width: 12vw;
