@@ -6,6 +6,7 @@
     <title>Document</title>
     <link rel="stylesheet" href="../../css/home.min.css" />
     <script src="../../node_modules/axios/dist/axios.min.js"></script>
+    <script src="../../node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script>
       function loadContent(url) {
         document.getElementById("contentFrame").src = url;
@@ -46,40 +47,86 @@
             class="collapse d-md-flex justify-content-end align-items-center text-end gap-3 my-auto h-100 mx-5"
             id="navBarToggleContent">
             <a
+              id="dashboard-link"
               href="#"
               onclick="loadContent('dashboard.html')"
-              class="text-dark text-decoration-none fw-light"
+              class="text-dark fw-light"
               >Dashboard</a
             >
             <a
               href="#"
               onclick="loadContent('transactions.html')"
-              class="text-dark text-decoration-none fw-light"
+              class="text-dark fw-light"
               >Transactions</a
             >
             <a
               href="#"
               onclick="loadContent('loans.html')"
-              class="text-dark text-decoration-none fw-light"
+              class="text-dark fw-light"
               >Loans</a
             >
             <a
               href="#"
               onclick="loadContent('profile.html')"
-              class="text-dark text-decoration-none fw-light"
+              class="text-dark fw-light"
               >Profile</a
             >
-            <a
-              href="#"
-              onclick="loadContent('logout.html')"
-              class="text-dark text-decoration-none fw-light"
-              >Logout</a
-            >
+            <div class="logout-btn" id="logout-btn">
+              <p class="m-auto">Logout</p>
+            </div>
           </div>
         </div>
       </div>
     </div>
     <iframe id="contentFrame" src="dashboard.html"></iframe>
-    <script src="../node_modules/bootstrap/dist/js/bootstrap.js"></script>
+    <script src="../../config/config.js"></script>
+    <script>
+      document.addEventListener("DOMContentLoaded", () => {
+        const links = document.querySelectorAll("a");
+        links.forEach((link) => {
+          link.addEventListener("click", (event) => {
+            event.preventDefault();
+            links.forEach((l) => l.classList.remove("active"));
+            link.classList.add("active");
+            loadContent(
+              link
+                .getAttribute("onclick")
+                .replace("loadContent('", "")
+                .replace("')", "")
+            );
+          });
+        });
+      });
+    </script>
+    <script>
+      window.onload = async function () {
+        document.getElementById("dashboard-link").classList.add("active");
+        try {
+          const response = await axios.get(`${config.API_URL}/User/profile`, {
+            withCredentials: true,
+          });
+        } catch (error) {
+          console.log(error);
+          window.location.href = "../auth/login.html";
+        }
+      };
+
+      document
+        .getElementById("logout-btn")
+        .addEventListener("click", async function () {
+          try {
+            const response = await axios.post(
+              `${config.API_URL}/Auth/logout`,
+              {},
+              {withCredentials: true}
+            );
+            if (response.status === 200) {
+              window.location.href = "../index.html";
+            }
+          } catch (error) {
+            console.log(error);
+          }
+        });
+    </script>
   </body>
 </html>

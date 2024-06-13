@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="../../css/pages.min.css" />
+    <script src="../../node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+  </head>
+  <body>
+    <div class="cont">
+      <div class="content-container">
+        <div class="left-side">
+          <div class="left-side-heading align-content-center">
+            <p class="mx-4 fs-5 my-auto fw-medium">LOANS</p>
+          </div>
+          <div class="left-side-accounts">
+            <div
+              class="skeleton-container w-100 h-100 d-flex justify-content-center align-content-center align-items-center">
+              <div class="spinner-border text-secondary" role="status">
+                <span class="visually-hidden">Loading...</span>
+              </div>
+            </div>
+          </div>
+          <div class="left-side-create-btn">
+            <p class="my-auto">APPLY LOAN</p>
+          </div>
+        </div>
+        <div class="right-side"></div>
+      </div>
+    </div>
+    <script src="../../config/config.js"></script>
+    <script src="../../node_modules/axios/dist/axios.min.js"></script>
+    <script>
+      async function loadAccounts() {
+        try {
+          const response = await axios.get(
+            `${config.API_URL}/Accounts/get-all-accounts`,
+            {
+              withCredentials: true,
+            }
+          );
+          console.log(response.data);
+
+          // Select the container where the accounts will be appended
+          const accountsContainer = document.querySelector(
+            ".left-side-accounts"
+          );
+
+          // Select the skeleton container and hide it
+          const skeletonContainer = document.querySelector(
+            ".skeleton-container"
+          );
+          skeletonContainer.className = skeletonContainer.className + " d-none";
+
+          // Loop through the array of accounts
+          response.data.forEach((account) => {
+            // Create a new div for the account
+            const accountDiv = document.createElement("div");
+            accountDiv.className = "card-account";
+
+            const innerDiv = document.createElement("div");
+
+            // Create a div for the account title
+            const titleDiv = document.createElement("div");
+            titleDiv.className = "card-account-title";
+            const titleP = document.createElement("p");
+            titleP.textContent = account.accountType + " Account";
+            titleDiv.appendChild(titleP);
+            innerDiv.appendChild(titleDiv);
+
+            // Create a div for the account details
+            const detailsDiv = document.createElement("div");
+            detailsDiv.className = "card-account-details";
+            const detailsP1 = document.createElement("p");
+            detailsP1.textContent =
+              "**** - **** - **** - **** - " + account.id.slice(-4); // Last 4 characters of the id
+            const detailsP2 = document.createElement("p");
+            detailsP2.textContent = "Balance: $" + account.balance;
+            detailsDiv.appendChild(detailsP1);
+            detailsDiv.appendChild(detailsP2);
+            innerDiv.appendChild(detailsDiv);
+
+            // Create the arrow div
+            const arrowDiv = document.createElement("div");
+            arrowDiv.className = "arrow my-auto mx-3";
+            const arrowImg = document.createElement("img");
+            arrowImg.src =
+              "../../node_modules/bootstrap-icons/icons/chevron-right.svg";
+            arrowImg.alt = "";
+            arrowImg.style.width = "2vw";
+            arrowDiv.appendChild(arrowImg);
+
+            // Append the inner div and arrow div to the account div
+            accountDiv.appendChild(innerDiv);
+            accountDiv.appendChild(arrowDiv);
+
+            // Append the account div to the accounts container
+            accountsContainer.appendChild(accountDiv);
+
+            // Inside the forEach loop where you create the account cards
+            accountDiv.addEventListener("click", async () => {
+              // Fetch the transactions
+              const loanResponses = await axios.get(
+                `${config.API_URL}/Loan/get-all-account-loans/${account.id}`,
+                {
+                  withCredentials: true,
+                }
+              );
+
+              // Select the right-side div
+              const rightSideDiv = document.querySelector(".right-side");
+
+              // Clear the right-side div
+              rightSideDiv.innerHTML = "";
+
+              const div = document.createElement("div");
+              div.className = "table-responsive";
+              // Create a table
+              const table = document.createElement("table");
+              table.className = "table ";
+
+              // Create the table header
+              const thead = document.createElement("thead");
+              const tr = document.createElement("tr");
+              [
+                "ID",
+                "Amount",
+                "Pending Amount",
+                "Applied Date",
+                "Details",
+              ].forEach((header) => {
+                const th = document.createElement("th");
+                th.scope = "col";
+                th.textContent = header;
+                tr.appendChild(th);
+              });
+              thead.appendChild(tr);
+              table.appendChild(thead);
+
+              // Create the table body
+              const tbody = document.createElement("tbody");
+              loanResponses.data.forEach((loans) => {
+                const tr = document.createElement("tr");
+                [
+                  loans.id,
+                  loans.amount,
+                  loans.pendingAmount,
+                  new Date(loans.appliedDate).toLocaleDateString("en-US", {
+                    year: "numeric",
+                    month: "long",
+                    day: "numeric",
+                  }),
+                ].forEach((data) => {
+                  const td = document.createElement("td");
+                  td.textContent = data;
+                  tr.appendChild(td);
+                });
+
+                // Create a button for the loan
+                const td = document.createElement("td");
+                const btn = document.createElement("button");
+                btn.type = "button";
+                btn.className = "btn btn-secondary my-auto";
+                btn.dataset.bsToggle = "modal";
+                btn.dataset.bsTarget = `#modal-${loans.id}`;
+                btn.textContent = "Details";
+                td.appendChild(btn);
+                tr.appendChild(td);
+
+                tbody.appendChild(tr);
+
+                // Create a modal for the loan
+                const modal = document.createElement("div");
+                modal.className = "modal fade";
+                modal.id = `modal-${loans.id}`;
+                modal.tabIndex = "-1";
+                modal.ariaLabelledby = `modal-${loans.id}-label`;
+                modal.ariaHidden = "true";
+                rightSideDiv.appendChild(modal);
+
+                const modalDialog = document.createElement("div");
+                modalDialog.className = "modal-dialog";
+                modal.appendChild(modalDialog);
+
+                const modalContent = document.createElement("div");
+                modalContent.className = "modal-content";
+                modalDialog.appendChild(modalContent);
+
+                const modalHeader = document.createElement("div");
+                modalHeader.className = "modal-header";
+                modalContent.appendChild(modalHeader);
+
+                const modalTitle = document.createElement("h5");
+                modalTitle.className = "modal-title";
+                modalTitle.id = `modal-${loans.id}-label`;
+                modalTitle.textContent = `Loan ${loans.id}`;
+                modalHeader.appendChild(modalTitle);
+
+                const modalBody = document.createElement("div");
+                modalBody.className = "modal-body";
+                modalContent.appendChild(modalBody);
+
+                const p1 = document.createElement("p");
+                p1.textContent = `Amount: ${loans.amount}`;
+                modalBody.appendChild(p1);
+
+                const p2 = document.createElement("p");
+                p2.textContent = `Pending Amount: ${loans.pendingAmount}`;
+                modalBody.appendChild(p2);
+
+                const p3 = document.createElement("p");
+                p3.textContent = `Applied Date: ${new Date(
+                  loans.appliedDate
+                ).toLocaleDateString("en-US", {
+                  year: "numeric",
+                  month: "long",
+                  day: "numeric",
+                })}`;
+                modalBody.appendChild(p3);
+
+                if (loans.status === "Closed") {
+                  const p6 = document.createElement("p");
+                  p5.textContent = `Target Date: ${new Date(
+                    loans.repaidDate
+                  ).toLocaleDateString("en-US", {
+                    year: "numeric",
+                    month: "long",
+                    day: "numeric",
+                  })}`;
+                  modalBody.appendChild(p6);
+                } else {
+                  const p5 = document.createElement("p");
+                  p5.textContent = `Target Date: ${new Date(
+                    loans.targetDate
+                  ).toLocaleDateString("en-US", {
+                    year: "numeric",
+                    month: "long",
+                    day: "numeric",
+                  })}`;
+                  modalBody.appendChild(p5);
+                }
+                const p4 = document.createElement("p");
+                p4.textContent = `Status: ${loans.status}`;
+                modalBody.appendChild(p4);
+                const modalFooter = document.createElement("div");
+                modalFooter.className = "modal-footer";
+                modalContent.appendChild(modalFooter);
+
+                const closeButton = document.createElement("button");
+                closeButton.type = "button";
+                closeButton.className = "btn btn-secondary";
+                closeButton.dataset.bsDismiss = "modal";
+                closeButton.textContent = "Close";
+
+                axios
+                  .post(
+                    `${config.API_URL}/Loan/get-loan-details`,
+                    {
+                      amount: loans.amount,
+                      appliedDate: loans.appliedDate,
+                      targetDate: loans.targetDate,
+                    },
+                    {
+                      withCredentials: true,
+                    }
+                  )
+                  .then((response) => {
+                    const p7 = document.createElement("p");
+                    p7.textContent = `Interest: ${response.data.interestRate}%`;
+                    modalFooter.appendChild(p7);
+                    const p8 = document.createElement("p");
+                    p8.textContent = `Total Amount: ${response.data.finalAmount}`;
+                    modalFooter.appendChild(p8);
+                    if (loans.status === "Opened") {
+                      const payButton = document.createElement("button");
+                      payButton.type = "button";
+                      payButton.className = "btn btn-primary";
+                      payButton.textContent = "Pay Loan";
+                      modalFooter.appendChild(payButton);
+                    }
+                    modalFooter.appendChild(closeButton);
+                  });
+              });
+              table.appendChild(tbody);
+              div.appendChild(table);
+              // Append the table to the right-side div
+              rightSideDiv.appendChild(table);
+            });
+          });
+        } catch (error) {
+          console.log(error);
+        }
+      }
+      loadAccounts();
+    </script>
+  </body>
+</html>
