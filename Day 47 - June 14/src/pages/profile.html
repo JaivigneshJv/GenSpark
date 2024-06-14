@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="../../css/pages.min.css" />
+    <script src="../../node_modules/axios/dist/axios.min.js"></script>
+    <script src="../../node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+  </head>
+  <body>
+    <div class="cont">
+      <div class="d-flex h-100 w-100">
+        <div class="col-6 d-flex align-items-center justify-content-center">
+          <div
+            class="w-75 h-50 border border-dark rounded-5 d-flex flex-column">
+            <div class="profile">
+              <img
+                src="../../assets/profile.png"
+                alt=""
+                class="d-flex m-auto mt-5"
+                style="width: 2.5vw" />
+              <p class="text-center fs-5 mt-3 fw-thin">John Doe</p>
+            </div>
+            <div class="mt-2 p-1 d-flex flex-column gap-2 mx-5">
+              <div class="email-details center">
+                <img
+                  src="../../node_modules/bootstrap-icons/icons/envelope.svg"
+                  style="width: 1.5vw"
+                  alt=""
+                  class="" />
+                <p class="d-inline ms-3 fw-light">email@email.com</p>
+              </div>
+              <div class="dob-details center">
+                <img
+                  src="../../node_modules/bootstrap-icons/icons/calendar4-event.svg"
+                  style="width: 1.5vw"
+                  alt=""
+                  class="" />
+                <p class="d-inline ms-3 fw-light">10 / 11 /2002</p>
+              </div>
+              <div class="contact-details center">
+                <img
+                  src="../../node_modules/bootstrap-icons/icons/person.svg"
+                  style="width: 1.5vw"
+                  alt=""
+                  class="" />
+                <p class="d-inline ms-3 fw-light">+91 123456789</p>
+              </div>
+            </div>
+            <div class="redirect-btns p-2 d-flex gap-3 fw-light mx-5">
+              <div class="redirect-btn border border-dark rounded-3 p-1">
+                Change Transaction Password
+              </div>
+              <div class="redirect-btn border border-dark rounded-3 p-1">
+                Change Password
+              </div>
+              <div class="redirect-btn border border-dark rounded-3 p-1">
+                Update Email
+              </div>
+            </div>
+            <div
+              class="created-container mx-3 mt-4 fw-light d-flex justify-content-end">
+              Created: 22 June 2024 11 : 30
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script src="../../node_modules/axios/dist/axios.min.js"></script>
+    <script>
+      axios
+        .get("https://192.168.0.103:7072/api/v1/User/profile", {
+          withCredentials: true,
+        })
+        .then((response) => {
+          console.log(response.data);
+          const data = response.data;
+          document.querySelector(
+            ".profile p"
+          ).textContent = `${data.firstName} ${data.lastName}`;
+          document.querySelector(".email-details p").textContent = data.email;
+          document.querySelector(".dob-details p").textContent = new Date(
+            data.dateOfBirth
+          ).toLocaleDateString();
+          document.querySelector(".contact-details p").textContent =
+            data.contact;
+          document.querySelector(
+            ".created-container"
+          ).textContent = `Created: ${new Date(
+            data.createdDate
+          ).toLocaleDateString()} ${new Date(
+            data.createdDate
+          ).toLocaleTimeString()}`;
+        })
+        .catch((error) => console.error(error));
+    </script>
+  </body>
+</html>

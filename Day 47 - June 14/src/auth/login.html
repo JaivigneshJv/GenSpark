@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="../../css/auth.min.css" />
+    <title>Document</title>
+    <script src="../../node_modules/axios/dist/axios.min.js"></script>
+  </head>
+  <body>
+    <div class="bg">
+      <img
+        src="../../assets/bg-image-bank-stable-diffusion.png"
+        alt=""
+        class="bg-image img-fluid" />
+      <div class="gray-bg"></div>
+    </div>
+    <div class="main-container">
+      <div class="nav-bar d-flex justify-content-between">
+        <div class="d-flex">
+          <img
+            src="../../assets/banklogo-thin.svg"
+            alt=""
+            class="nav-bar-img" />
+          <div class="m-auto" style="line-height: 2vw">
+            <p class="nav-bar-title mx-2">SIMPLE BANK</p>
+            <p class="nav-bar-title-description mx-2">
+              Smart Banking With Simple Bank
+            </p>
+          </div>
+        </div>
+        <div class=""></div>
+      </div>
+      <div class="content-container">
+        <div class="login-container d-flex flex-column">
+          <div class="login-title">
+            <p class="login-title-text">LOGIN</p>
+          </div>
+          <div class="input-container">
+            <input
+              type="text"
+              placeholder="Username"
+              class="input"
+              id="username" />
+            <input
+              type="password"
+              placeholder="Password"
+              class="input"
+              id="password" />
+
+            <div class="d-flex justify-content-between">
+              <p style="font-size: 80%" id="error-msg"></p>
+              <button class="login-btn" id="login-btn">
+                <p class="login-btn-text">LOGIN</p>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script src="../../config/config.js"></script>
+    <script>
+      window.onload = async function () {
+        try {
+          const response = await axios.get(`${config.API_URL}/User/profile`, {
+            withCredentials: true,
+          });
+          if (response.status === 200) {
+            window.location.href = "../pages/home.html";
+          } else {
+            return;
+          }
+        } catch (error) {}
+      };
+    </script>
+    <script>
+      document
+        .getElementById("login-btn")
+        .addEventListener("click", async function (event) {
+          event.preventDefault();
+
+          const username = document.getElementById("username").value;
+          const password = document.getElementById("password").value;
+
+          if (username === "" || password === "") {
+            document.getElementById("error-msg").innerText =
+              "Please fill in all fields";
+            return;
+          }
+
+          try {
+            const response = await axios.post(
+              `${config.API_URL}/Auth/login`,
+              {
+                username: username,
+                password: password,
+              },
+              {
+                withCredentials: true,
+              }
+            );
+
+            if (response.status === 200) {
+              document.getElementById("error-msg").innerText =
+                "login successful, redirecting...";
+              setTimeout(() => {
+                window.location.href = "../pages/home.html";
+              }, 5000);
+            } else {
+              document.getElementById("error-msg").innerText =
+                response.data.message;
+              console.error(response.data.message);
+            }
+          } catch (error) {
+            document.getElementById("error-msg").innerText =
+              "Invalid Credentials";
+          }
+        });
+    </script>
+  </body>
+</html>

@@ -1,0 +1,72 @@
+$font-family: "Poppins", sans-serif;
+$bg-color: whitesmoke;
+$bg-container-color: white;
+$error-color: red;
+$light-border-color: #ddd;
+@import "../../node_modules/bootstrap/scss/bootstrap.scss";
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500&display=swap");
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background-color: $bg-color;
+  font-family: $font-family;
+}
+
+.container {
+  background: $bg-container-color;
+  border-radius: 10px;
+  padding: 3rem !important;
+}
+
+.error {
+  border-color: $error-color;
+}
+
+.error-message {
+  color: $error-color;
+  font-size: 0.9em;
+  margin-top: 5px;
+}
+
+.form-group {
+  margin-bottom: 1.5em;
+}
+
+.form-section {
+  margin-bottom: 2em;
+  padding: 1.5em;
+  border: 1px solid $light-border-color;
+  border-radius: 5px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+
+  h3 {
+    margin-bottom: 1em;
+  }
+}
+
+@mixin poppins-font-weight($weight) {
+  font-family: $font-family;
+  font-weight: $weight;
+  font-style: normal;
+}
+
+.poppins-extralight {
+  @include poppins-font-weight(200);
+}
+
+.poppins-light {
+  @include poppins-font-weight(300);
+}
+
+.poppins-regular {
+  @include poppins-font-weight(400);
+}
+
+.poppins-medium {
+  @include poppins-font-weight(500);
+}

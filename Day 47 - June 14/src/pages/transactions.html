@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="../../css/pages.min.css" />
+  </head>
+  <body>
+    <div class="cont">
+      <div class="content-container">
+        <div class="left-side">
+          <div class="left-side-heading align-content-center">
+            <p class="mx-4 fs-5 my-auto fw-medium">TRANSACTIONS</p>
+          </div>
+          <div
+            class="left-side-accounts d-flex flex-column gap-2 align-items-center">
+            <div
+              class="border border-dark-subtle rounded-5 mt-5 d-flex align-content-center align-items-center justify-content-between"
+              style="height: 1vh; padding: 5%; width: 90%">
+              <div class="">IMPS</div>
+              <img
+                src="../../node_modules/bootstrap-icons/icons/chevron-right.svg"
+                alt="" />
+            </div>
+            <div
+              class="border border-dark-subtle rounded-5 mt-3 d-flex align-content-center align-items-center justify-content-between"
+              style="height: 1vh; padding: 5%; width: 90%">
+              <div class="">RTGS</div>
+              <img
+                src="../../node_modules/bootstrap-icons/icons/chevron-right.svg"
+                alt="" />
+            </div>
+            <div
+              class="border border-dark-subtle rounded-5 mt-3 d-flex align-content-center align-items-center justify-content-between"
+              style="height: 1vh; padding: 5%; width: 90%">
+              <div class="">NEFT</div>
+              <img
+                src="../../node_modules/bootstrap-icons/icons/chevron-right.svg"
+                alt="" />
+            </div>
+          </div>
+        </div>
+        <div class="right-side d-flex flex-column justify-content-between">
+          <div class="">
+            <h3></h3>
+            <p></p>
+          </div>
+          <div
+            class="transact-btn w-auto d-flex justify-content-end"
+            style="display: none !important">
+            <a
+              href="../index.html"
+              class="text-decoration-none"
+              style="color: inherit">
+              <div
+                class="btn btn-dark w-100 border rounded-5 d-flex justify-content-center align-items-center align-self-end">
+                <p class="my-auto">Transact</p>
+              </div>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script src="../../config/config.js"></script>
+    <script src="../../node_modules/axios/dist/axios.min.js"></script>
+    <script>
+      const content = {
+        IMPS: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam asperiores maxime explicabo praesentium mollitia sequi, dolores aveniam fuga vitae! Aliquid mollitia architecto totam consequunturdelectus aliquam debitis, voluptatibus atque!",
+        RTGS: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam asperiores maxime explicabo praesentium mollitia sequi, dolores aveniam fuga vitae! Aliquid mollitia architecto totam consequunturdelectus aliquam debitis, voluptatibus atque!",
+        NEFT: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam asperiores maxime explicabo praesentium mollitia sequi, dolores aveniam fuga vitae! Aliquid mollitia architecto totam consequunturdelectus aliquam debitis, voluptatibus atque!",
+      };
+      const urls = {
+        IMPS: "?type=IMPS",
+        RTGS: "?type=RTGS",
+        NEFT: "?type=NEFT",
+      };
+
+      document.querySelectorAll(".left-side-accounts > div").forEach((div) => {
+        div.addEventListener("click", function () {
+          document.querySelector(".transact-btn").style.display = "";
+          document
+            .querySelectorAll(".left-side-accounts > div")
+            .forEach((div) => {
+              div.classList.remove("border-dark");
+            });
+          this.classList.remove("border-dark-subtle");
+          this.classList.add("border-dark");
+          const rightSide = document.querySelector(".right-side > div");
+          const sectionName = this.querySelector("div").textContent;
+          document.querySelector(".transact-btn a").href =
+            "./transact.html" + urls[sectionName];
+          rightSide.innerHTML = `
+            <h3>${sectionName}</h3>
+            <p>${content[sectionName]}</p>
+          `;
+        });
+      });
+    </script>
+  </body>
+</html>

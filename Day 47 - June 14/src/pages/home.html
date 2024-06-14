@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="../../css/home.min.css" />
+    <script src="../../node_modules/axios/dist/axios.min.js"></script>
+    <script src="../../node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+      function loadContent(url) {
+        document.getElementById("contentFrame").src = url;
+      }
+    </script>
+  </head>
+  <body>
+    <div class="nav-bar p-4">
+      <div class="row">
+        <div
+          class="col-sm-8 col-lg-4 d-flex align-items-center align-content-center">
+          <img src="../../assets/banklogo-thin.svg" style="width: 2.5vw" />
+          <p
+            class="fw-lighter my-auto mx-4"
+            style="font-weight: 100; font-size: 2.5vw">
+            Simple Bank
+          </p>
+        </div>
+        <div class="col-sm-4 col-lg-8 d-md-none d-sm-flex justify-content-end">
+          <nav class="navbar">
+            <div class="container-fluid d-flex justify-content-end">
+              <button
+                id="nav-btn"
+                class="navbar-toggler"
+                type="button"
+                data-bs-toggle="collapse"
+                data-bs-target="#navBarToggleContent"
+                aria-controls="navBarToggleContent"
+                aria-expanded="false"
+                aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+              </button>
+            </div>
+          </nav>
+        </div>
+        <div class="col-md-8 col-sm-12">
+          <div
+            class="collapse d-md-flex justify-content-end align-items-center text-end gap-3 my-auto h-100 mx-5"
+            id="navBarToggleContent">
+            <a
+              id="dashboard-link"
+              href="#"
+              onclick="loadContent('dashboard.html')"
+              class="text-dark fw-light"
+              >Dashboard</a
+            >
+            <a
+              href="#"
+              onclick="loadContent('transactions.html')"
+              class="text-dark fw-light"
+              >Transactions</a
+            >
+            <a
+              href="#"
+              onclick="loadContent('loans.html')"
+              class="text-dark fw-light"
+              >Loans</a
+            >
+            <a
+              href="#"
+              onclick="loadContent('profile.html')"
+              class="text-dark fw-light"
+              >Profile</a
+            >
+            <div class="logout-btn" id="logout-btn">
+              <p class="m-auto">Logout</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <iframe id="contentFrame" src="dashboard.html"></iframe>
+    <script src="../../config/config.js"></script>
+    <script>
+      document.addEventListener("DOMContentLoaded", () => {
+        const links = document.querySelectorAll("a");
+        links.forEach((link) => {
+          link.addEventListener("click", (event) => {
+            event.preventDefault();
+            links.forEach((l) => l.classList.remove("active"));
+            link.classList.add("active");
+            loadContent(
+              link
+                .getAttribute("onclick")
+                .replace("loadContent('", "")
+                .replace("')", "")
+            );
+          });
+        });
+      });
+    </script>
+    <script>
+      window.onload = async function () {
+        document.getElementById("dashboard-link").classList.add("active");
+        try {
+          const response = await axios.get(`${config.API_URL}/User/profile`, {
+            withCredentials: true,
+          });
+        } catch (error) {
+          console.log(error);
+          window.location.href = "../auth/login.html";
+        }
+      };
+
+      document
+        .getElementById("logout-btn")
+        .addEventListener("click", async function () {
+          try {
+            const response = await axios.post(
+              `${config.API_URL}/Auth/logout`,
+              {},
+              {withCredentials: true}
+            );
+            if (response.status === 200) {
+              window.location.href = "../index.html";
+            }
+          } catch (error) {
+            console.log(error);
+          }
+        });
+    </script>
+  </body>
+</html>

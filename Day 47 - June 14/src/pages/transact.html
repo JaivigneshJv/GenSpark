@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="../../css/extras.min.css" />
+    <title>Document</title>
+    <script src="../../node_modules/axios/dist/axios.min.js"></script>
+  </head>
+  <body>
+    <div class="d-flex" style="height: 99vh">
+      <div class="col-6">
+        <div
+          class="d-flex justify-content-center h-100 align-content-center align-items-center">
+          <div
+            class="transaction-content d-flex flex-column border border-secondary w-75 rounded-3">
+            <div class="heading-text p-4 fw-bold fs-3"></div>
+            <div class="">
+              <div class="p-4">
+                <form class="d-flex flex-column gap-4">
+                  <div class="">
+                    <select
+                      name="account"
+                      class="form-select bg-transparent border-dark"
+                      aria-label="Default select example">
+                      <option selected disabled>Select Account</option>
+                    </select>
+                  </div>
+                  <div class="">
+                    <input
+                      name="beneficiaryAccountNumber"
+                      type="text"
+                      class="form-control bg-transparent border-dark"
+                      placeholder="Enter Beneficiary Account Number" />
+                  </div>
+                  <div class="input-group mb-3">
+                    <span
+                      class="input-group-text bg-transparent border-dark"
+                      id="basic-addon1"
+                      >₹</span
+                    >
+                    <input
+                      name="amount"
+                      type="number"
+                      class="form-control bg-transparent border-dark"
+                      placeholder="Amount"
+                      aria-describedby="basic-addon1" />
+                  </div>
+                  <div class="" style="margin-top: -2vh">
+                    <input
+                      name="transactionPassword"
+                      type="password"
+                      class="form-control bg-transparent border-dark"
+                      placeholder="Transaction Password" />
+                  </div>
+                  <div class="">
+                    <input
+                      name="confirmTransactionPassword"
+                      type="password"
+                      class="form-control bg-transparent border-dark"
+                      placeholder="Confirm Transaction Password" />
+                  </div>
+                </form>
+              </div>
+            </div>
+            <div class="d-flex justify-content-end p-4" style="height: 100%">
+              <p class="transfer-btn-error mx-3"></p>
+              <div class="transfer-btn btn btn-dark">
+                <p class="my-auto">Transfer</p>
+              </div>
+            </div>
+          </div>
+          <div
+            class="otp-content d-flex flex-column border border-secondary w-75 rounded-3 d-none">
+            <div class="heading-text p-4 fw-bold fs-3">OTP</div>
+            <div class="">
+              <div class="p-4">
+                <form id="otp-form" class="d-flex flex-column gap-4">
+                  <div class="">
+                    <input
+                      name="otp"
+                      type="text"
+                      class="form-control bg-transparent border-dark"
+                      placeholder="Enter OTP" />
+                  </div>
+                </form>
+              </div>
+              <div class="d-flex justify-content-end p-4" style="height: 100%">
+                <p class="confirm-btn-error mx-3"></p>
+                <div class="confirm-btn btn btn-dark">
+                  <p class="my-auto">CONFIRM</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script src="../../config/config.js"></script>
+    <script>
+      const params = new URLSearchParams(window.location.search);
+      const transactionType = params.get("type");
+      console.log(transactionType);
+      const heading = document.querySelector(".heading-text");
+      heading.innerHTML = "";
+      if (transactionType === "IMPS") {
+        heading.innerHTML = "IMPS";
+      } else if (transactionType === "NEFT") {
+        heading.innerHTML = "NEFT";
+      } else if (transactionType === "RTGS") {
+        heading.innerHTML = "RTGS";
+      } else {
+        //window.location.href = `dashboard.html`;
+      }
+    </script>
+    <script>
+      async function loadAccounts() {
+        try {
+          const response = await axios.get(
+            `${config.API_URL}/Accounts/get-all-accounts`,
+            {
+              withCredentials: true,
+            }
+          );
+          console.log(response.data);
+          const select = document.querySelector("select");
+          response.data.forEach((account) => {
+            const option = document.createElement("option");
+            option.value = account.id;
+            let id = account.id;
+            let maskedId =
+              "*".repeat(id.length - 24) +
+              id.slice(-10) +
+              " -- Balance : " +
+              account.balance;
+            option.innerHTML = maskedId;
+            option.classList.add("bg-transparent", "border-dark");
+            select.appendChild(option);
+          });
+        } catch (error) {
+          console.error(error);
+        }
+      }
+      loadAccounts();
+    </script>
+    <script src="../../node_modules/axios/dist/axios.min.js"></script>
+    <script>
+      const transferContent = document.querySelector(".transaction-content");
+      const transferBtn = document.querySelector(".transfer-btn");
+      const transferBtnError = document.querySelector(".transfer-btn-error");
+      const otpContent = document.querySelector(".otp-content");
+      const confirmBtn = document.querySelector(".confirm-btn");
+      const confirmBtnError = document.querySelector(".confirm-btn-error");
+      transferBtn.addEventListener("click", async () => {
+        transferBtn.classList.add("disabled");
+
+        const form = document.querySelector("form");
+        const formData = new FormData(form);
+        console.log(formData);
+
+        const data = {
+          amount: formData.get("amount"),
+          transactionPassword: formData.get("transactionPassword"),
+          transactionType: transactionType,
+        };
+
+        try {
+          const senderAccount = formData.get("account");
+          const beneficiaryAccountNumber = formData.get(
+            "beneficiaryAccountNumber"
+          );
+          const response = await axios.post(
+            `${config.API_URL}/Transaction/bank-transfer/${senderAccount}/${beneficiaryAccountNumber}`,
+            data,
+            {
+              withCredentials: true,
+            }
+          );
+          console.log(response.data);
+          if (response.status === 200) {
+            transferContent.classList.add("d-none");
+            otpContent.classList.remove("d-none");
+          }
+        } catch (error) {
+          transferBtnError.innerHTML =
+            error.response.data.error + " redirecting!";
+          setTimeout(() => {
+            window.location.href = "transactions.html";
+          }, 3000);
+          transferBtn.classList.remove("disabled");
+          console.error(error);
+        }
+      });
+      confirmBtn.addEventListener("click", async () => {
+        otpContent.classList.add("disabled");
+        confirmBtn.classList.add("disabled");
+        const form = document.querySelector("form");
+        const formData = new FormData(form);
+        const form1 = document.querySelector("#otp-form");
+        const formData1 = new FormData(form1);
+        const otp = formData1.get("otp");
+        const senderAccount = formData.get("account");
+        try {
+          const response = await axios.post(
+            `${config.API_URL}/Transaction/transfer/verify-transaction/${senderAccount}/${otp}`,
+            {},
+            {
+              withCredentials: true,
+            }
+          );
+          if (response.status === 200) {
+            if (transactionType !== "IMPS") {
+              confirmBtnError.innerHTML =
+                "Transaction Request Has been Raised! Redirecting...";
+              setTimeout(() => {
+                window.location.href = "transactions.html";
+              }, 5000);
+            }
+            confirmBtnError.innerHTML =
+              "Transaction Successful! Redirecting...";
+            setTimeout(() => {
+              window.location.href = "transactions.html";
+            }, 3000);
+          }
+        } catch (error) {
+          confirmBtnError.innerHTML = error.response.data.error;
+          otpContent.classList.remove("disabled");
+          confirmBtn.classList.remove("disabled");
+        }
+      });
+    </script>
+  </body>
+</html>
