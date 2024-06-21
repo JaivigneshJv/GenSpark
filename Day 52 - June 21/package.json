@@ -1,0 +1,12 @@
+{
+  "name": "day-52---june-21",
+  "version": "1.0.0",
+  "main": "oops-concepts.js",
+  "scripts": {
+    "start": "node prototype-based.js && node oops-concepts.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": ""
+}
