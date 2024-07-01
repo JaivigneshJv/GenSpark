@@ -71,3 +71,12 @@ yarn.lock
 # IDE specific files
 .vscode/
 .idea/
+
+# Python development
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+*.egg-info/
+dist/
+build/
