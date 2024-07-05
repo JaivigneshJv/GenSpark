@@ -22,7 +22,3 @@ To use this Docker image, follow these steps:
     ```
     docker run python-hello-world
     ```
-
-## License
-
-This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for more information.
