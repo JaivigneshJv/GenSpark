@@ -53,9 +53,6 @@ function createKeyboard() {
 
 function handleKey(key) {
     const keyButton = document.getElementById(`key-${key}`);
-    if (keyButton.classList.contains("disabled")) {
-        return;
-    }
     if (currentCol < 5) {
         const tile = document.getElementById(`tile-${currentRow}-${currentCol}`);
         tile.textContent = key;
@@ -106,7 +103,6 @@ function checkGuess() {
             keyButton.classList.add("present");
         } else {
             tile.classList.add("absent");
-            keyButton.classList.add("disabled");
             keyButton.classList.add("absent");
         }
     }
