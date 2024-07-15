@@ -1,0 +1,133 @@
+body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 100vh;
+  background-color: #121213;
+  color: #ffffff;
+  font-family: Arial, sans-serif;
+  margin: 0;
+}
+nav {
+  position: fixed;
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  background-color: #121213;
+  color: #ffffff;
+  font-family: Arial, sans-serif;
+  margin: 0;
+  gap: 50px;
+  border-bottom: 1px solid #3a3a3c;
+}
+nav h1 {
+  margin-left: 1em;
+}
+
+/* Button Styling */
+#new-game {
+  background-color: #ffffff;
+  color: rgb(0, 0, 0);
+  padding: 10px 24px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+  transition: background-color 0.3s ease;
+}
+
+#new-game:hover {
+  background-color: #767976; /* Darker shade of green on hover */
+}
+
+.board-container {
+  margin-top: 12vh;
+  display: grid;
+}
+
+#board {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  grid-gap: 5px;
+  margin-bottom: 20px;
+}
+
+.tile {
+  width: 2.8em;
+  height: 2.8em;
+  background-color: transparent;
+  border: 2px solid #3a3a3c;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 24px;
+  font-weight: bold;
+}
+
+.tile.correct {
+  border: 1px solid #538d4e;
+  background-color: #538d4e;
+}
+
+.tile.present {
+  border: 1px solid #b59f3b;
+  background-color: #b59f3b;
+}
+
+.tile.absent {
+  border: 1px solid #3a3a3c;
+  background-color: #3a3a3c;
+}
+
+.keyboard-container {
+  display: grid;
+}
+
+#keyboard {
+  display: grid;
+  grid-template-columns: repeat(10, 1fr);
+  grid-gap: 10px;
+  max-width: 600px;
+  justify-content: flex-end;
+  align-items: flex-end;
+}
+
+.key {
+  width: 40px;
+  height: 60px;
+  background-color: #3a3a3c;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+  font-weight: bold;
+  cursor: pointer;
+  border-radius: 4px;
+}
+
+.key.correct {
+  background-color: #6aaa64;
+}
+
+.key.present {
+  background-color: #c9b458;
+}
+
+.key.absent {
+  background-color: #787c7e;
+}
+
+.key.disabled {
+  background-color: #787c7e;
+  cursor: not-allowed;
+}
+
+#keyboard .enter-key {
+  grid-column: span 2;
+  width: 90px;
+}
+
+#keyboard .backspace-key {
+  grid-column: span 2;
+  width: 90px;
+}
