@@ -2,7 +2,7 @@
 
 Welcome to the Wordle Clone! This is a simple web-based version of the popular word game Wordle. Test your word-guessing skills and have fun trying to guess the five-letter word of the day!
 
-You can view the live version [here](https://your-wordle-clone.azurestaticapps.net).
+You can view the live version [here](https://delightful-bush-01bd4e700.5.azurestaticapps.net/).
 
 ## Features
 
