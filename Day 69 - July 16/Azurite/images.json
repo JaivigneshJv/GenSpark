@@ -1,0 +1,14 @@
+[
+  {
+    "imageName": "example1.jpg",
+    "imageUrl": "https://imagewebappjv.blob.core.windows.net/images/example1.jpg",
+    "size": "1024 KB",
+    "uploadDate": "2024-07-16T12:00:00Z"
+  },
+  {
+    "imageName": "example2.jpg",
+    "imageUrl": "https://imagewebappjv.blob.core.windows.net/images/example2.jpg",
+    "size": "2048 KB",
+    "uploadDate": "2024-07-16T12:30:00Z"
+  }
+]
