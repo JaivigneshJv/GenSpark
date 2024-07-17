@@ -4,6 +4,12 @@
 
 This Web API connects to a SQL Server instance running on a Virtual Machine to fetch product details. It retrieves the product's name, price, and picture. The picture images are stored in Azure Blob Storage, and the connection string for the SQL Server is securely stored and accessed from Azure Key Vault. The API supports only the GET method.
 
+Links 
+
+- [Web API swagger](https://74.225.241.169:7072/swagger/index.html)
+- [Product 1](https://productapigenspark.blob.core.windows.net/images/product1.jpg)
+- [Product 2](https://productapigenspark.blob.core.windows.net/images/product1.jpg)
+
 
 
 ## Features
